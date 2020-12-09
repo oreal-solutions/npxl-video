@@ -1,0 +1,5 @@
+// TODO: Document the whole structure of an Npxl video file here
+// Remember the unit of media playback is a packet(decide on better name) with a
+// single graphics frame and an audio snaphot.
+// For this revision (5), the only renderables are paths. Other circles will be
+// added in future revisions.
