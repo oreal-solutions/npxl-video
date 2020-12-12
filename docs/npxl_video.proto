@@ -1,5 +1,141 @@
 // TODO: Document the whole structure of an Npxl video file here
-// Remember the unit of media playback is a packet(decide on better name) with a
+// Remember the unit of media playback is a page with a
 // single graphics frame and an audio snaphot.
 // For this revision (5), the only renderables are paths. Other circles will be
 // added in future revisions.
+
+/// Revision 5.0
+///
+/// This file documents the No Pixels video format (npxl). The npxl video format
+/// is a vector graphics video format. It is specifically designed for
+/// educational voice over slide videos.
+///
+///
+///
+/// ---- UNDERSTANDING THE ANATOMY ----
+///
+/// Most frames of e-learning voice over slide videos have three
+/// noticeable features:
+///    1. They have a solid background color
+///    2. They have material renderables rendered on top of the background
+///       color. These can be
+///          a) Images copy and pasted into the slide
+///          b) Parts of a pdf or powerpoint presentation, e.g a single page of
+///          a pdf presentation
+///    3. They have stylus pen writings/drawings, and highlightings rendered on
+///       top of the material renderables.
+///
+/// On top of the three graphics features above, most videos come with audio.
+///
+/// The npxl video format encodes the above mentioned graphics features and
+/// audio into a binary structure with three top level data sections namely:
+///   1) Video Header - Describes the overall structure of the video file and
+///      provides the global media parameters required to decode the media.
+///   2) Media Pages Section - A media page encodes a vector frame with and 2.5,
+///      5, 10, 20, 40, or 60 ms of encoded audio data.
+///   3) Material Renderables Section- These are referenced by frames and should
+///      be rendered where the frame signals.
+///
+/// Media Pages are checksummed to allow for easy identification of corrupted
+/// pages during media streaming over unreliable protocols. The video
+/// header and material renderables should always be sent over a reliable
+/// protocols.
+///
+/// This is how an npxl file looks like with all these sections:
+///
+/// NB: All lengths are unsigned integers. The counting unit is a byte.
+///
+///  ____________________________________
+/// |                                    |
+/// | 4 bytes of npxl major revision code|
+/// |____________________________________|
+/// |                                    |
+/// |   4 bytes of Video Header length   |
+/// |____________________________________|
+/// |                                    |
+/// |           Video Header             |
+/// |____________________________________|
+/// |                                    |
+/// |           Media Page 1             |
+/// |____________________________________|
+/// |                                    |
+/// |           Media Page 2             |
+/// |____________________________________|
+/// |                                    |
+/// |           Media Page 3             |
+/// |____________________________________|
+/// |                                    |
+/// |           ............             |
+/// |____________________________________|
+/// |                                    |
+/// |       Material Renderable 1        |
+/// |____________________________________|
+/// |                                    |
+/// |       Material Renderable 2        |
+/// |____________________________________|
+/// |                                    |
+/// |       Material Renderable 3        |
+/// |____________________________________|
+/// |                                    |
+/// |           ............             |
+/// |____________________________________|
+///
+/// A video header and a material renderable are data structures and, therefore,
+/// only have fields. A Media Page has subsections. The structure of a media
+/// page is as follows:
+///
+///  ____________________________________
+/// |                                    |
+/// |       2 bytes CRC16 checksum       |
+/// |____________________________________|
+/// |                                    |
+/// |  4 bytes start timestamp in millis |
+/// |____________________________________|
+/// |                                    |
+/// |   1 byte page duration in millis   |
+/// |____________________________________|
+/// |                                    |
+/// | 2 bytes of Media Page Header length|
+/// |____________________________________|
+/// |                                    |
+/// |         Media Page Header          |
+/// |____________________________________|
+/// |                                    |
+/// |  Compressed Audio Data (optional)  |
+/// |____________________________________|
+///
+/// The binary data from the start timestamp to the end of the compressed audio
+/// data is checksummed. The checksum value is then added as the first 2 bytes
+/// of the Media Page.
+///
+/// Including audio data in a page is optional. This allows for the muting of
+/// audio. The start timestamp and page duration fields allow playback
+/// coordinators to work out the correct graphics frame to be shown at a given
+/// time when the media page does not have audio - since this is rather
+/// impossible without the audio. These two fields should also be used in
+/// streaming situations to determine if any pages have been lost. As of
+/// libopus 1.3.1 lost audio frames should be accounted for by calling the
+/// decoder with null values.
+///
+/// When the page does have audio, a media playback coordinator should rely on
+/// its audio playback coordinator to tell it the audio frame being played and
+/// render the graphics frame of the Media Page that audio frame belongs to.
+///
+/// The start timestamp is the time, in millis, from when the video started
+/// recording to when the page graphics frame is shown on the video for the
+/// first time. The page duration is how long, in millis the media page is. If
+/// the video does have audio, the page duration is how long the audio frame is,
+/// else it is how long the page graphics frame is shown on the video.
+///
+///
+///
+/// ---- REVISION MANAGEMENT ----
+///
+/// A the top of this file there is a revision number in the form x.y where x
+/// is the major version and y is the minor version of the npxl video format
+/// this file documents. The x value is only incremented when, and only when:
+///    1) The structure of a data structure and/or section is modified. e.g by
+///       adding, removing, or renaming fields
+///    2) A data structure and/or section is added, removed, or renamed
+///
+/// The y value is incremented for all other changes.
