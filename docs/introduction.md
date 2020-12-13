@@ -19,8 +19,6 @@ This video format targets voice of slide educational videos, like those made by 
 3. Videos should be able to be saved to files and replayed when needed (video file format) [ ]
 4. Videos should be network streamable with modern and secure media streaming APIs and techniques [ ]
 
-Once these 4 goals are achieved a new and innovative video format will be born.
-
 ## Understanding the npxl video format
 
 Please read [npxl_video.proto](npxl_video.proto)
