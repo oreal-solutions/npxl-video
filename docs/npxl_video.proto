@@ -1,9 +1,3 @@
-// TODO: Document the whole structure of an Npxl video file here
-// Remember the unit of media playback is a page with a
-// single graphics frame and an audio snaphot.
-// For this revision (5), the only renderables are paths. Other circles will be
-// added in future revisions.
-
 /// Revision 5.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
@@ -21,25 +15,24 @@
 ///       color. These can be
 ///          a) Images copy and pasted into the slide
 ///          b) Parts of a pdf or powerpoint presentation, e.g a single page of
-///          a pdf presentation
+///             a pdf presentation
 ///    3. They have stylus pen writings/drawings, and highlightings rendered on
 ///       top of the material renderables.
 ///
-/// On top of the three graphics features above, most videos come with audio.
+/// Along with the three graphics features above, most videos come with audio.
 ///
 /// The npxl video format encodes the above mentioned graphics features and
 /// audio into a binary structure with three top level data sections namely:
 ///   1) Video Header - Describes the overall structure of the video file and
 ///      provides the global media parameters required to decode the media.
-///   2) Media Pages Section - A media page encodes a vector frame with and 2.5,
+///   2) Media Pages Section - A media page encodes a vector frame with 2.5,
 ///      5, 10, 20, 40, or 60 ms of encoded audio data.
-///   3) Material Renderables Section- These are referenced by frames and should
-///      be rendered where the frame signals.
+///   3) Video Resources Section- These are referenced by Material Renderables
+///      and should be rendered where the Material Renderable signals.
 ///
 /// Media Pages are checksummed to allow for easy identification of corrupted
 /// pages during media streaming over unreliable protocols. The video
-/// header and material renderables should always be sent over a reliable
-/// protocols.
+/// header and video resources should always be sent over reliable protocols.
 ///
 /// This is how an npxl file looks like with all these sections:
 ///
@@ -47,10 +40,10 @@
 ///
 ///  ____________________________________
 /// |                                    |
-/// | 4 bytes of npxl major revision code|
+/// | 2 bytes of npxl major revision code|
 /// |____________________________________|
 /// |                                    |
-/// |   4 bytes of Video Header length   |
+/// |   2 bytes of Video Header length   |
 /// |____________________________________|
 /// |                                    |
 /// |           Video Header             |
@@ -68,74 +61,260 @@
 /// |           ............             |
 /// |____________________________________|
 /// |                                    |
-/// |       Material Renderable 1        |
+/// |         Video Resource 1           |
 /// |____________________________________|
 /// |                                    |
-/// |       Material Renderable 2        |
+/// |         Video Resource 2           |
 /// |____________________________________|
 /// |                                    |
-/// |       Material Renderable 3        |
+/// |         Video Resource 3           |
 /// |____________________________________|
 /// |                                    |
 /// |           ............             |
 /// |____________________________________|
 ///
-/// A video header and a material renderable are data structures and, therefore,
-/// only have fields. A Media Page has subsections. The structure of a media
-/// page is as follows:
+/// A video header only has fields. Media Pages and Video Resources have
+/// subsections.
+///
+/// The structure of a media page is as follows:
 ///
 ///  ____________________________________
 /// |                                    |
 /// |       2 bytes CRC16 checksum       |
-/// |____________________________________|
-/// |                                    |
-/// |  4 bytes start timestamp in millis |
-/// |____________________________________|
-/// |                                    |
-/// |   1 byte page duration in millis   |
-/// |____________________________________|
-/// |                                    |
-/// | 2 bytes of Media Page Header length|
-/// |____________________________________|
-/// |                                    |
-/// |         Media Page Header          |
-/// |____________________________________|
-/// |                                    |
-/// |  Compressed Audio Data (optional)  |
-/// |____________________________________|
+/// |____________________________________|__
+/// |                                    |  |
+/// | 2 bytes of Media Page Header length|  |
+/// |____________________________________|  |___> Checksummed data
+/// |                                    |  |
+/// |         Media Page Header          |  |
+/// |____________________________________|  |
+/// |                                    |  |
+/// |  Compressed Audio Data (optional)  |  |
+/// |____________________________________|__|
 ///
-/// The binary data from the start timestamp to the end of the compressed audio
-/// data is checksummed. The checksum value is then added as the first 2 bytes
-/// of the Media Page.
+/// The binary data from the media page header length to the end of the
+/// compressed audio data is checksummed. The checksum value is then added as
+/// the first 2 bytes of the Media Page.
 ///
 /// Including audio data in a page is optional. This allows for the muting of
-/// audio. The start timestamp and page duration fields allow playback
-/// coordinators to work out the correct graphics frame to be shown at a given
-/// time when the media page does not have audio - since this is rather
-/// impossible without the audio. These two fields should also be used in
-/// streaming situations to determine if any pages have been lost. As of
-/// libopus 1.3.1 lost audio frames should be accounted for by calling the
-/// decoder with null values.
+/// audio when capturing the video.
 ///
-/// When the page does have audio, a media playback coordinator should rely on
-/// its audio playback coordinator to tell it the audio frame being played and
-/// render the graphics frame of the Media Page that audio frame belongs to.
+/// When dealing with pages that don't have audio, the media playback
+/// coordinator should rely on its audio playback coordinator to tell it the
+/// audio frame being played and render the graphics frame of the Media Page
+/// that audio frame belongs to.
 ///
-/// The start timestamp is the time, in millis, from when the video started
-/// recording to when the page graphics frame is shown on the video for the
-/// first time. The page duration is how long, in millis the media page is. If
-/// the video does have audio, the page duration is how long the audio frame is,
-/// else it is how long the page graphics frame is shown on the video.
+/// The structure of a video resource is as follows:
+///
+///  _________________________________________
+/// |                                         |
+/// | 2 bytes of Video Resource Header length |
+/// |_________________________________________|
+/// |                                         |
+/// |         Video Resource Header           |
+/// |_________________________________________|
+/// |                                         |
+/// |          Video Resource Data            |
+/// |_________________________________________|
 ///
 ///
 ///
 /// ---- REVISION MANAGEMENT ----
 ///
-/// A the top of this file there is a revision number in the form x.y where x
+/// At the top of this file there is a revision number in the form x.y where x
 /// is the major version and y is the minor version of the npxl video format
 /// this file documents. The x value is only incremented when, and only when:
 ///    1) The structure of a data structure and/or section is modified. e.g by
-///       adding, removing, or renaming fields
+///       adding, removing, or renaming fields.
 ///    2) A data structure and/or section is added, removed, or renamed
 ///
-/// The y value is incremented for all other changes.
+/// The y value is incremented for all other changes besides documentation
+/// grammatical fixes.
+
+syntax = "proto3";
+
+message VideoHeader {
+  AudioProperties audio_propeties = 1;
+
+  // The number of bytes to skip, from the beginning of the video binary data,
+  // to get to the first byte of the video resources section.
+  uint32 start_of_video_resources_section = 2;
+}
+
+// A Media Page Header.
+message MediaPageHeader {
+  // The page number of this media page.
+  //
+  // Media Page numbers do not need to start from zero. They don't even need to
+  // be positive. The restriction is that a media page has a page number that is
+  // exactly 1 more than that of the media page immediately before it.
+  //
+  // In streaming situations, page numbers should be used to account for lost
+  // pages. As of libopus 1.3.1 lost audio frames should be accounted for by
+  // caling the decoder with null values.
+  uint32 media_page_number = 1;
+
+  // The page duration is how long, in millis the media page is.
+  //
+  // If the media pahe has audio, the page duration is how long the audio frame
+  // is, else it is how long the page graphics frame is shown on the video.
+  //
+  // This value provides the length, in millis, of the page in the case it does
+  // not have audio - or the media coordinator chooses to ignore the audio
+  // (perhaps it is corrupted).
+  uint32 page_duration_millis = 2;
+
+  // The vector frame for this media page.
+  RenderingInstructions vectorFrame = 3;
+
+  // The size, in bytes, of the compressed audio data section.
+  uint32 audio_data_section_size = 4;
+}
+
+// A video resource.
+message VideoResource {
+  // A unique id that identifies this resource.
+  string resource_id = 1;
+
+  // The mime type of the resource.
+  //
+  // As of this revision of the npxl video format, resource decoders can expect
+  // the following mime types:
+  //    1. application/pdf
+  //    2. image/*
+  //          where * can be any image format, e.g png, jpeg, etc.
+  string mime_type = 2;
+
+  // The size, in bytes, of the video resource data section.
+  uint32 data_section_size = 3;
+}
+
+/* ------- Supporting data structures ------- */
+
+// The parameters required by the audio decoder to decode the audio frames in
+// pages.
+message AudioProperties {
+  // The sampling rate per channel used for the audio frames.
+  //
+  // As of libopus 1.3.1 this should be 8 000, 12 000, 16 000, 24 000,
+  // or 48 000.
+  uint32 sampling_rate = 1;
+
+  // Number of channels.
+  //
+  // Should be 1 or 2.
+  uint32 number_of_channels = 2;
+}
+
+// A 32 bit color structure with 8 bit color values of alpha, red, green and
+// blue in that order.
+message Color { uint32 value = 1; }
+
+// A point in 2D space.
+message Point {
+  double dx = 1;
+  double dy = 2;
+}
+
+// A point in 2D space for a path.
+//
+// When drawing a line with a ballpoint pen a user normally applies less
+// pressure at the beginning and end of the line. This makes the line lighter
+// and thinner by the ends.
+//
+// The pressure component allows renderers to recreate this effect. Pressure
+// values range from 0 for no pressure to 1 for full pressure.
+message PathPoint {
+  Point coordinates = 1;
+  double pressure = 2;
+}
+
+// A path drawable in 2D space.
+message Path {
+  Color color = 1;
+  double strokeWidth = 2;
+
+  // The points for this path.
+  //
+  // A path should have at least 2 points.
+  repeated PathPoint points = 3;
+}
+
+// A material renderable in 2D space.
+message MaterialRenderable {
+
+  // Tells where the top left corner of this material renderable should be
+  // placed in the 2D space.
+  Point top_left_corner = 1;
+
+  double width = 2;
+  double height = 3;
+
+  // The id of the video resource to be decoded as the texture for this material
+  // renderable.
+  string resource_id = 4;
+
+  // The page number of the pdf resource to be rendered for this material.
+  //
+  // This should only be used when the 'resource_id' references a pdf video
+  // resource.
+  uint32 page_number = 5;
+}
+
+// A pointer drawable in 2D space.
+//
+// A pointer drawable allows the video creator to direct the viewer as to where
+// to look on the image produced by the rendering instructions this pointer is
+// part of.
+message Pointer {
+  Point coordinates = 1;
+  Color color = 2;
+  double strokeWidth = 3;
+
+  enum PointerType {
+    // The pointer should not be shown.
+    none = 0;
+
+    // The pointer should be shown as a circle.
+    circle = 1;
+
+    // The pointer should be shown as a pen with its writing tip at the
+    // coordinates of the pointer.
+    pen = 2;
+
+    // The pointer be shown as a finger pointing at the coordinates of the
+    // pointer.
+    finger = 3;
+  }
+  PointerType type = 4;
+}
+
+// A Viewport tells a renderer which part of the rendering instructions to show.
+message Viewport {
+  Point top_left_corner = 1;
+  double width = 2;
+  double height = 3;
+}
+
+// Rendering instructions provide thye drawables and material renderables to be
+// be rendered for a frame.
+//
+// A per the documentation above, Rendering Instructions are the graphics
+// features of a frame.
+message RenderingInstructions {
+  Viewport viewport = 1;
+  Color background_color = 2;
+
+  // The material renderables to be drawn for these rendering instructions.
+  repeated MaterialRenderable materialRenderables = 3;
+
+  // The path drawables to be drawn for these rendering instructions.
+  //
+  // The paths should be rendered in the order they are given in, in this list.
+  //
+  // Renderers should antialias paths and draw them with rounded corners. This
+  // is to make sure all paths look and feel like ballpoint pen writings.
+  repeated Path paths = 4;
+
+  Pointer pointer = 5;
+}
