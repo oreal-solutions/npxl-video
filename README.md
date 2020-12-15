@@ -15,7 +15,7 @@ Do the following to generate the kotlin sources from [npxl_video.proto](docs/npx
 
 ```bash
 protoc \
-    --kotlin_out=lib/src/commonMain/kotlin \
+    --kotlin_out=src/commonMain/kotlin \
     --plugin=protoc-gen-kotlin=/path/to/pbandk/protoc-gen-kotlin/jvm/build/install/protoc-gen-kotlin/bin/protoc-gen-kotlin.bat \
     docs/npxl_video.proto
 ```
