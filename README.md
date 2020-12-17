@@ -1,6 +1,20 @@
-# npxl-video
+# No Pixels Video (npxl video)
 
-The beginning of an e-learning revolution
+This library is the reference implementation of the [npxl video format](docs/introduction.md). It serves only the purpose of reading and writing npxl files. It does not implement the capability to play the video format on any platform.
+
+The npxl video format uses [opus](https://opus-codec.org/) as its audio codec. This library, however, does not come with libopus classes. It is up to the user of the library to do the encoding and decoding of audio. The LytOwl team will provide a simple libopus library specifically for use with this library in the near future.
+
+## Targets
+
+Through Kotlin multiplatform, these are the platforms this library is targeting.
+
+- [ ] Kotlin/JVM
+- [ ] Kotlin/Native (Objective-C)
+- [ ] kotlin/JS
+
+## Understanding this library
+
+![Library Architecture](docs/assets/classes.png)
 
 ## Generating the kotlin sources from the proto file
 
