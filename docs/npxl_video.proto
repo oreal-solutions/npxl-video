@@ -172,7 +172,7 @@ message MediaPageHeader {
 }
 
 // A video resource.
-message VideoResource {
+message VideoResourceHeader {
   // A unique id that identifies this resource.
   string resource_id = 1;
 

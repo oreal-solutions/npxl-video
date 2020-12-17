@@ -111,7 +111,7 @@ data class MediaPageHeader(
     }
 }
 
-data class VideoResource(
+data class VideoResourceHeader(
     val resourceId: String = "",
     val mimeType: String = "",
     val dataSectionSize: Int = 0,
@@ -120,12 +120,12 @@ data class VideoResource(
     override operator fun plus(other: pbandk.Message?) = protoMergeImpl(other)
     override val descriptor get() = Companion.descriptor
     override val protoSize by lazy { super.protoSize }
-    companion object : pbandk.Message.Companion<VideoResource> {
-        val defaultInstance by lazy { VideoResource() }
-        override fun decodeWith(u: pbandk.MessageDecoder) = VideoResource.decodeWithImpl(u)
+    companion object : pbandk.Message.Companion<VideoResourceHeader> {
+        val defaultInstance by lazy { VideoResourceHeader() }
+        override fun decodeWith(u: pbandk.MessageDecoder) = VideoResourceHeader.decodeWithImpl(u)
 
-        override val descriptor: pbandk.MessageDescriptor<VideoResource> by lazy {
-            val fieldsList = ArrayList<pbandk.FieldDescriptor<VideoResource, *>>(3).apply {
+        override val descriptor: pbandk.MessageDescriptor<VideoResourceHeader> by lazy {
+            val fieldsList = ArrayList<pbandk.FieldDescriptor<VideoResourceHeader, *>>(3).apply {
                 add(
                     pbandk.FieldDescriptor(
                         messageDescriptor = this@Companion::descriptor,
@@ -133,7 +133,7 @@ data class VideoResource(
                         number = 1,
                         type = pbandk.FieldDescriptor.Type.Primitive.String(),
                         jsonName = "resourceId",
-                        value = VideoResource::resourceId
+                        value = VideoResourceHeader::resourceId
                     )
                 )
                 add(
@@ -143,7 +143,7 @@ data class VideoResource(
                         number = 2,
                         type = pbandk.FieldDescriptor.Type.Primitive.String(),
                         jsonName = "mimeType",
-                        value = VideoResource::mimeType
+                        value = VideoResourceHeader::mimeType
                     )
                 )
                 add(
@@ -153,12 +153,12 @@ data class VideoResource(
                         number = 3,
                         type = pbandk.FieldDescriptor.Type.Primitive.UInt32(),
                         jsonName = "dataSectionSize",
-                        value = VideoResource::dataSectionSize
+                        value = VideoResourceHeader::dataSectionSize
                     )
                 )
             }
             pbandk.MessageDescriptor(
-                messageClass = VideoResource::class,
+                messageClass = VideoResourceHeader::class,
                 messageCompanion = this,
                 fields = fieldsList
             )
@@ -725,14 +725,14 @@ private fun MediaPageHeader.Companion.decodeWithImpl(u: pbandk.MessageDecoder): 
     return MediaPageHeader(mediaPageNumber, pageDurationMillis, vectorFrame, audioDataSectionSize, unknownFields)
 }
 
-fun VideoResource?.orDefault() = this ?: VideoResource.defaultInstance
+fun VideoResourceHeader?.orDefault() = this ?: VideoResourceHeader.defaultInstance
 
-private fun VideoResource.protoMergeImpl(plus: pbandk.Message?): VideoResource = (plus as? VideoResource)?.copy(
+private fun VideoResourceHeader.protoMergeImpl(plus: pbandk.Message?): VideoResourceHeader = (plus as? VideoResourceHeader)?.copy(
     unknownFields = unknownFields + plus.unknownFields
 ) ?: this
 
 @Suppress("UNCHECKED_CAST")
-private fun VideoResource.Companion.decodeWithImpl(u: pbandk.MessageDecoder): VideoResource {
+private fun VideoResourceHeader.Companion.decodeWithImpl(u: pbandk.MessageDecoder): VideoResourceHeader {
     var resourceId = ""
     var mimeType = ""
     var dataSectionSize = 0
@@ -744,7 +744,7 @@ private fun VideoResource.Companion.decodeWithImpl(u: pbandk.MessageDecoder): Vi
             3 -> dataSectionSize = _fieldValue as Int
         }
     }
-    return VideoResource(resourceId, mimeType, dataSectionSize, unknownFields)
+    return VideoResourceHeader(resourceId, mimeType, dataSectionSize, unknownFields)
 }
 
 fun AudioProperties?.orDefault() = this ?: AudioProperties.defaultInstance
