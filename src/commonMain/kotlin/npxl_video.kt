@@ -2,7 +2,7 @@
 
 
 data class VideoHeader(
-    val audioPropeties: AudioProperties? = null,
+    val audioProperties: AudioProperties? = null,
     val startOfVideoResourcesSection: Int = 0,
     override val unknownFields: Map<Int, pbandk.UnknownField> = emptyMap()
 ) : pbandk.Message {
@@ -18,11 +18,11 @@ data class VideoHeader(
                 add(
                     pbandk.FieldDescriptor(
                         messageDescriptor = this@Companion::descriptor,
-                        name = "audio_propeties",
+                        name = "audio_properties",
                         number = 1,
                         type = pbandk.FieldDescriptor.Type.Message(messageCompanion = AudioProperties.Companion),
-                        jsonName = "audioPropeties",
-                        value = VideoHeader::audioPropeties
+                        jsonName = "audioProperties",
+                        value = VideoHeader::audioProperties
                     )
                 )
                 add(
@@ -682,22 +682,22 @@ data class RenderingInstructions(
 fun VideoHeader?.orDefault() = this ?: VideoHeader.defaultInstance
 
 private fun VideoHeader.protoMergeImpl(plus: pbandk.Message?): VideoHeader = (plus as? VideoHeader)?.copy(
-    audioPropeties = audioPropeties?.plus(plus.audioPropeties) ?: plus.audioPropeties,
+    audioProperties = audioProperties?.plus(plus.audioProperties) ?: plus.audioProperties,
     unknownFields = unknownFields + plus.unknownFields
 ) ?: this
 
 @Suppress("UNCHECKED_CAST")
 private fun VideoHeader.Companion.decodeWithImpl(u: pbandk.MessageDecoder): VideoHeader {
-    var audioPropeties: AudioProperties? = null
+    var audioProperties: AudioProperties? = null
     var startOfVideoResourcesSection = 0
 
     val unknownFields = u.readMessage(this) { _fieldNumber, _fieldValue ->
         when (_fieldNumber) {
-            1 -> audioPropeties = _fieldValue as AudioProperties
+            1 -> audioProperties = _fieldValue as AudioProperties
             2 -> startOfVideoResourcesSection = _fieldValue as Int
         }
     }
-    return VideoHeader(audioPropeties, startOfVideoResourcesSection, unknownFields)
+    return VideoHeader(audioProperties, startOfVideoResourcesSection, unknownFields)
 }
 
 fun MediaPageHeader?.orDefault() = this ?: MediaPageHeader.defaultInstance

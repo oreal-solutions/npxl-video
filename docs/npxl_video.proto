@@ -134,7 +134,7 @@
 syntax = "proto3";
 
 message VideoHeader {
-  AudioProperties audio_propeties = 1;
+  AudioProperties audio_properties = 1;
 
   // The number of bytes to skip, from the beginning of the video binary data,
   // to get to the first byte of the video resources section.
@@ -151,7 +151,7 @@ message MediaPageHeader {
   //
   // In streaming situations, page numbers should be used to account for lost
   // pages. As of libopus 1.3.1 lost audio frames should be accounted for by
-  // caling the decoder with null values.
+  // calling the decoder with null values.
   uint32 media_page_number = 1;
 
   // The page duration is how long, in millis the media page is.
