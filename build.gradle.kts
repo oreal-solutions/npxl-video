@@ -8,7 +8,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
+
+val pbandkVersion = "0.10.0-alpha.1"
 
 kotlin {
     jvm {
@@ -30,25 +33,35 @@ kotlin {
             }
         }
     }
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        hostOs == "Mac OS X" -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-    }
+
+    // TODO(Batandwa) Enable Kotlin Native for Objective C target
+//    val hostOs = System.getProperty("os.name")
+//    val isMingwX64 = hostOs.startsWith("Windows")
+//    val nativeTarget = when {
+//        hostOs == "Mac OS X" -> macosX64("native")
+//        hostOs == "Linux" -> linuxX64("native")
+//        isMingwX64 -> mingwX64("native")
+//        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+//    }
 
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("pro.streem.pbandk:pbandk-runtime:$pbandkVersion")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation("pro.streem.pbandk:pbandk-runtime-jvm:$pbandkVersion")
+            }
+        }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit5"))
@@ -56,17 +69,33 @@ kotlin {
                 runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
             }
         }
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation("pro.streem.pbandk:pbandk-runtime-js:$pbandkVersion")
+            }
+        }
         val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
+
+                // We need to add this here too for 'gradlew test' to resolve the dependency.
+                // For some weird reason we need to duplicate the dependencies of jsMain here too.
+                implementation("pro.streem.pbandk:pbandk-runtime-js:$pbandkVersion")
             }
         }
-        val nativeMain by getting
-        val nativeTest by getting
+//        val nativeMain by getting {
+//            dependencies {
+//                implementation("pro.streem.pbandk:pbandk-runtime-native:$pbandkVersion")
+//            }
+//        }
+//        val nativeTest by getting
     }
 }
 
 application {
     mainClassName = "MainKt"
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }

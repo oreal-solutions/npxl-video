@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="npxl_video-jvm-1.0-SNAPSHOT">
-    <output-path>C:\Users\Batandwa\Desktop\Open-Source\npxl_video\lib\build\libs</output-path>
+    <output-path>C:\Users\Batandwa\Desktop\Open-Source\npxl_video\build\libs</output-path>
     <root id="archive" name="npxl_video-jvm-1.0-SNAPSHOT.jar">
       <element id="module-output" name="npxl_video.jvmMain" />
     </root>
