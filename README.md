@@ -68,7 +68,7 @@ class DemoTest {
 
 ### Running unit tests from the command line
 
-To run the unit test run `gradlew test` from your terminal.
+To run the unit tests run `gradlew test` from your terminal.
 
 ### Running the unit tests from IntelliJ IDEA
 
