@@ -1,6 +1,6 @@
 interface SectionBuilder {
     /**
-     * Serialises the object to its representation as per the documentation
+     * Serialises the object to its binary representation as per the documentation
      * for the object in npxl_video.proto.
      */
     fun build(): ByteArray
