@@ -1,4 +1,4 @@
-/// Revision 5.0
+/// Revision 6.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -139,30 +139,35 @@ message VideoHeader {
   // The number of bytes to skip, from the beginning of the video binary data,
   // to get to the first byte of the video resources section.
   uint32 start_of_video_resources_section = 2;
+
+  // The length of the video in milliseconds.
+  //
+  // This is the sum of all the durations of the media pages.
+  uint32 video_duration_in_millis = 3;
 }
 
 // A Media Page Header.
 message MediaPageHeader {
   // The page number of this media page.
   //
-  // Media Page numbers do not need to start from zero. They don't even need to
-  // be positive. The restriction is that a media page has a page number that is
-  // exactly 1 more than that of the media page immediately before it.
+  // Media Page numbers do not need to start from zero. The only restriction is
+  // that a media page has a page number that is exactly 1 more than that of the
+  // media page immediately before it.
   //
   // In streaming situations, page numbers should be used to account for lost
   // pages. As of libopus 1.3.1 lost audio frames should be accounted for by
   // calling the decoder with null values.
   uint32 media_page_number = 1;
 
-  // The page duration is how long, in millis the media page is.
+  // The page duration is how long, in milliseconds the media page is.
   //
-  // If the media pahe has audio, the page duration is how long the audio frame
+  // If the media page has audio, the page duration is how long the audio frame
   // is, else it is how long the page graphics frame is shown on the video.
   //
   // This value provides the length, in millis, of the page in the case it does
   // not have audio - or the media coordinator chooses to ignore the audio
-  // (perhaps it is corrupted).
-  uint32 page_duration_millis = 2;
+  // (e.g when it is corrupted).
+  uint32 page_duration_in_millis = 2;
 
   // The vector frame for this media page.
   RenderingInstructions vectorFrame = 3;
@@ -208,7 +213,7 @@ message AudioProperties {
 
 // A 32 bit color structure with 8 bit color values of alpha, red, green and
 // blue in that order.
-message Color { uint32 value = 1; }
+message Color {uint32 value = 1;}
 
 // A point in 2D space.
 message Point {
@@ -296,7 +301,7 @@ message Viewport {
   double height = 3;
 }
 
-// Rendering instructions provide thye drawables and material renderables to be
+// Rendering instructions provide the drawables and material renderables to be
 // be rendered for a frame.
 //
 // A per the documentation above, Rendering Instructions are the graphics

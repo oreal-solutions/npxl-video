@@ -4,6 +4,7 @@
 data class VideoHeader(
     val audioProperties: AudioProperties? = null,
     val startOfVideoResourcesSection: Int = 0,
+    val videoDurationInMillis: Int = 0,
     override val unknownFields: Map<Int, pbandk.UnknownField> = emptyMap()
 ) : pbandk.Message {
     override operator fun plus(other: pbandk.Message?) = protoMergeImpl(other)
@@ -14,7 +15,7 @@ data class VideoHeader(
         override fun decodeWith(u: pbandk.MessageDecoder) = VideoHeader.decodeWithImpl(u)
 
         override val descriptor: pbandk.MessageDescriptor<VideoHeader> by lazy {
-            val fieldsList = ArrayList<pbandk.FieldDescriptor<VideoHeader, *>>(2).apply {
+            val fieldsList = ArrayList<pbandk.FieldDescriptor<VideoHeader, *>>(3).apply {
                 add(
                     pbandk.FieldDescriptor(
                         messageDescriptor = this@Companion::descriptor,
@@ -35,6 +36,16 @@ data class VideoHeader(
                         value = VideoHeader::startOfVideoResourcesSection
                     )
                 )
+                add(
+                    pbandk.FieldDescriptor(
+                        messageDescriptor = this@Companion::descriptor,
+                        name = "video_duration_in_millis",
+                        number = 3,
+                        type = pbandk.FieldDescriptor.Type.Primitive.UInt32(),
+                        jsonName = "videoDurationInMillis",
+                        value = VideoHeader::videoDurationInMillis
+                    )
+                )
             }
             pbandk.MessageDescriptor(
                 messageClass = VideoHeader::class,
@@ -47,7 +58,7 @@ data class VideoHeader(
 
 data class MediaPageHeader(
     val mediaPageNumber: Int = 0,
-    val pageDurationMillis: Int = 0,
+    val pageDurationInMillis: Int = 0,
     val vectorFrame: RenderingInstructions? = null,
     val audioDataSectionSize: Int = 0,
     override val unknownFields: Map<Int, pbandk.UnknownField> = emptyMap()
@@ -74,11 +85,11 @@ data class MediaPageHeader(
                 add(
                     pbandk.FieldDescriptor(
                         messageDescriptor = this@Companion::descriptor,
-                        name = "page_duration_millis",
+                        name = "page_duration_in_millis",
                         number = 2,
                         type = pbandk.FieldDescriptor.Type.Primitive.UInt32(),
-                        jsonName = "pageDurationMillis",
-                        value = MediaPageHeader::pageDurationMillis
+                        jsonName = "pageDurationInMillis",
+                        value = MediaPageHeader::pageDurationInMillis
                     )
                 )
                 add(
@@ -690,14 +701,16 @@ private fun VideoHeader.protoMergeImpl(plus: pbandk.Message?): VideoHeader = (pl
 private fun VideoHeader.Companion.decodeWithImpl(u: pbandk.MessageDecoder): VideoHeader {
     var audioProperties: AudioProperties? = null
     var startOfVideoResourcesSection = 0
+    var videoDurationInMillis = 0
 
     val unknownFields = u.readMessage(this) { _fieldNumber, _fieldValue ->
         when (_fieldNumber) {
             1 -> audioProperties = _fieldValue as AudioProperties
             2 -> startOfVideoResourcesSection = _fieldValue as Int
+            3 -> videoDurationInMillis = _fieldValue as Int
         }
     }
-    return VideoHeader(audioProperties, startOfVideoResourcesSection, unknownFields)
+    return VideoHeader(audioProperties, startOfVideoResourcesSection, videoDurationInMillis, unknownFields)
 }
 
 fun MediaPageHeader?.orDefault() = this ?: MediaPageHeader.defaultInstance
@@ -710,19 +723,19 @@ private fun MediaPageHeader.protoMergeImpl(plus: pbandk.Message?): MediaPageHead
 @Suppress("UNCHECKED_CAST")
 private fun MediaPageHeader.Companion.decodeWithImpl(u: pbandk.MessageDecoder): MediaPageHeader {
     var mediaPageNumber = 0
-    var pageDurationMillis = 0
+    var pageDurationInMillis = 0
     var vectorFrame: RenderingInstructions? = null
     var audioDataSectionSize = 0
 
     val unknownFields = u.readMessage(this) { _fieldNumber, _fieldValue ->
         when (_fieldNumber) {
             1 -> mediaPageNumber = _fieldValue as Int
-            2 -> pageDurationMillis = _fieldValue as Int
+            2 -> pageDurationInMillis = _fieldValue as Int
             3 -> vectorFrame = _fieldValue as RenderingInstructions
             4 -> audioDataSectionSize = _fieldValue as Int
         }
     }
-    return MediaPageHeader(mediaPageNumber, pageDurationMillis, vectorFrame, audioDataSectionSize, unknownFields)
+    return MediaPageHeader(mediaPageNumber, pageDurationInMillis, vectorFrame, audioDataSectionSize, unknownFields)
 }
 
 fun VideoResourceHeader?.orDefault() = this ?: VideoResourceHeader.defaultInstance
