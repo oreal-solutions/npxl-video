@@ -24,7 +24,7 @@ kotlin {
         withJava()
     }
     js {
-        useCommonJs ()
+        useCommonJs()
         browser {}
         nodejs {}
     }
@@ -39,11 +39,12 @@ kotlin {
 //        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
 //    }
 
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation("pro.streem.pbandk:pbandk-runtime:$pbandkVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
             }
         }
         val commonTest by getting {
@@ -67,6 +68,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation("pro.streem.pbandk:pbandk-runtime-js:$pbandkVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.4.2")
 
                 // Adding the protobufjs dependency here used by pdbank-kotlin solves
                 // the npm error 'module protobufjs/light' not found.
