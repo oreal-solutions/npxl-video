@@ -11,7 +11,7 @@ repositories {
     jcenter()
 }
 
-val pbandkVersion = "0.10.0-alpha.1"
+val pbandkVersion = "0.9.1"
 
 kotlin {
     jvm {
@@ -23,15 +23,10 @@ kotlin {
         }
         withJava()
     }
-    js(LEGACY) {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                    webpackConfig.cssSupport.enabled = true
-                }
-            }
-        }
+    js {
+        useCommonJs ()
+        browser {}
+        nodejs {}
     }
 
     // TODO(Batandwa) Enable Kotlin Native for Objective C target
@@ -72,15 +67,15 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation("pro.streem.pbandk:pbandk-runtime-js:$pbandkVersion")
+
+                // Adding the protobufjs dependency here used by pdbank-kotlin solves
+                // the npm error 'module protobufjs/light' not found.
+                implementation(npm("protobufjs", "~6.10.2"))
             }
         }
         val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
-
-                // We need to add this here too for 'gradlew test' to resolve the dependency.
-                // For some weird reason we need to duplicate the dependencies of jsMain here too.
-                implementation("pro.streem.pbandk:pbandk-runtime-js:$pbandkVersion")
             }
         }
 //        val nativeMain by getting {
