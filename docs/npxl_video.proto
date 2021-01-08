@@ -1,4 +1,4 @@
-/// Revision 6.0
+/// Revision 7.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -209,6 +209,13 @@ message AudioProperties {
   //
   // Should be 1 or 2.
   uint32 number_of_channels = 2;
+
+  // The duration of a media page audio data in samples (per channel).
+  //
+  // The audio frames of an npxl video should all have the same frame size.
+  // It is for this reason that this field is part of the audio properties
+  // rather than being local to a Media Page.
+  uint32 frame_size = 3;
 }
 
 // A 32 bit color structure with 8 bit color values of alpha, red, green and

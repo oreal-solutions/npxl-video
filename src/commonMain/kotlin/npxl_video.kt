@@ -180,6 +180,7 @@ data class VideoResourceHeader(
 data class AudioProperties(
     val samplingRate: Int = 0,
     val numberOfChannels: Int = 0,
+    val frameSize: Int = 0,
     override val unknownFields: Map<Int, pbandk.UnknownField> = emptyMap()
 ) : pbandk.Message {
     override operator fun plus(other: pbandk.Message?) = protoMergeImpl(other)
@@ -190,7 +191,7 @@ data class AudioProperties(
         override fun decodeWith(u: pbandk.MessageDecoder) = AudioProperties.decodeWithImpl(u)
 
         override val descriptor: pbandk.MessageDescriptor<AudioProperties> by lazy {
-            val fieldsList = ArrayList<pbandk.FieldDescriptor<AudioProperties, *>>(2).apply {
+            val fieldsList = ArrayList<pbandk.FieldDescriptor<AudioProperties, *>>(3).apply {
                 add(
                     pbandk.FieldDescriptor(
                         messageDescriptor = this@Companion::descriptor,
@@ -209,6 +210,16 @@ data class AudioProperties(
                         type = pbandk.FieldDescriptor.Type.Primitive.UInt32(),
                         jsonName = "numberOfChannels",
                         value = AudioProperties::numberOfChannels
+                    )
+                )
+                add(
+                    pbandk.FieldDescriptor(
+                        messageDescriptor = this@Companion::descriptor,
+                        name = "frame_size",
+                        number = 3,
+                        type = pbandk.FieldDescriptor.Type.Primitive.UInt32(),
+                        jsonName = "frameSize",
+                        value = AudioProperties::frameSize
                     )
                 )
             }
@@ -770,14 +781,16 @@ private fun AudioProperties.protoMergeImpl(plus: pbandk.Message?): AudioProperti
 private fun AudioProperties.Companion.decodeWithImpl(u: pbandk.MessageDecoder): AudioProperties {
     var samplingRate = 0
     var numberOfChannels = 0
+    var frameSize = 0
 
     val unknownFields = u.readMessage(this) { _fieldNumber, _fieldValue ->
         when (_fieldNumber) {
             1 -> samplingRate = _fieldValue as Int
             2 -> numberOfChannels = _fieldValue as Int
+            3 -> frameSize = _fieldValue as Int
         }
     }
-    return AudioProperties(samplingRate, numberOfChannels, unknownFields)
+    return AudioProperties(samplingRate, numberOfChannels, frameSize, unknownFields)
 }
 
 fun Color?.orDefault() = this ?: Color.defaultInstance
