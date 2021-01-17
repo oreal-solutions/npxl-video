@@ -36,7 +36,8 @@
 ///
 /// This is how an npxl file looks like with all these sections:
 ///
-/// NB: All lengths are unsigned integers. The counting unit is a byte.
+/// NB: All lengths are unsigned integers. Lengths that take up more than one
+///     byte must have their bytes arranged in little endian.
 ///
 ///  ____________________________________
 /// |                                    |
