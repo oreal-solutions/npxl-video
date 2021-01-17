@@ -15,7 +15,7 @@ Uint8List convertUnsignedShortToBytes(int unsignedShort) {
 
 /// Redas the first 2 bytes in the given as an unsigned integer.
 ///
-/// The bytes are assumed to ordered in little endian.
+/// The bytes are assumed to be ordered in little endian.
 int getUnsignedShortFromUint8List(Uint8List data) {
   if (data.lengthInBytes < 2)
     throw ArgumentError("The given list needs to have at least 2 bytes.");
