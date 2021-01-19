@@ -1,4 +1,4 @@
-/// Revision 7.0
+/// Revision 8.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -137,9 +137,8 @@ syntax = "proto3";
 message VideoHeader {
   AudioProperties audio_properties = 1;
 
-  // The number of bytes to skip, from the beginning of the video binary data,
-  // to get to the first byte of the video resources section.
-  uint32 start_of_video_resources_section = 2;
+  // The number of bytes the media Pages section occupies.
+  uint32 media_pages_size = 2;
 
   // The length of the video in milliseconds.
   //
@@ -221,7 +220,7 @@ message AudioProperties {
 
 // A 32 bit color structure with 8 bit color values of alpha, red, green and
 // blue in that order.
-message Color {uint32 value = 1;}
+message Color { uint32 value = 1; }
 
 // A point in 2D space.
 message Point {

@@ -16,7 +16,7 @@ export 'npxl_video.pbenum.dart';
 class VideoHeader extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'VideoHeader', createEmptyInstance: create)
     ..aOM<AudioProperties>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'audioProperties', subBuilder: AudioProperties.create)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startOfVideoResourcesSection', $pb.PbFieldType.OU3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mediaPagesSize', $pb.PbFieldType.OU3)
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoDurationInMillis', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
@@ -24,15 +24,15 @@ class VideoHeader extends $pb.GeneratedMessage {
   VideoHeader._() : super();
   factory VideoHeader({
     AudioProperties audioProperties,
-    $core.int startOfVideoResourcesSection,
+    $core.int mediaPagesSize,
     $core.int videoDurationInMillis,
   }) {
     final _result = create();
     if (audioProperties != null) {
       _result.audioProperties = audioProperties;
     }
-    if (startOfVideoResourcesSection != null) {
-      _result.startOfVideoResourcesSection = startOfVideoResourcesSection;
+    if (mediaPagesSize != null) {
+      _result.mediaPagesSize = mediaPagesSize;
     }
     if (videoDurationInMillis != null) {
       _result.videoDurationInMillis = videoDurationInMillis;
@@ -72,13 +72,13 @@ class VideoHeader extends $pb.GeneratedMessage {
   AudioProperties ensureAudioProperties() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.int get startOfVideoResourcesSection => $_getIZ(1);
+  $core.int get mediaPagesSize => $_getIZ(1);
   @$pb.TagNumber(2)
-  set startOfVideoResourcesSection($core.int v) { $_setUnsignedInt32(1, v); }
+  set mediaPagesSize($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasStartOfVideoResourcesSection() => $_has(1);
+  $core.bool hasMediaPagesSize() => $_has(1);
   @$pb.TagNumber(2)
-  void clearStartOfVideoResourcesSection() => clearField(2);
+  void clearMediaPagesSize() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.int get videoDurationInMillis => $_getIZ(2);

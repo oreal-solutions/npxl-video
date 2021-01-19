@@ -9,7 +9,7 @@ const VideoHeader$json = const {
   '1': 'VideoHeader',
   '2': const [
     const {'1': 'audio_properties', '3': 1, '4': 1, '5': 11, '6': '.AudioProperties', '10': 'audioProperties'},
-    const {'1': 'start_of_video_resources_section', '3': 2, '4': 1, '5': 13, '10': 'startOfVideoResourcesSection'},
+    const {'1': 'media_pages_size', '3': 2, '4': 1, '5': 13, '10': 'mediaPagesSize'},
     const {'1': 'video_duration_in_millis', '3': 3, '4': 1, '5': 13, '10': 'videoDurationInMillis'},
   ],
 };
