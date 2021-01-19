@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
 abstract class RandomAccessByteInputStream {
+  int get numberOfReadableBytes;
+
   void close();
 
   /// Reads data from the input stream.
