@@ -9,9 +9,20 @@ const VideoHeader$json = const {
   '1': 'VideoHeader',
   '2': const [
     const {'1': 'audio_properties', '3': 1, '4': 1, '5': 11, '6': '.AudioProperties', '10': 'audioProperties'},
-    const {'1': 'media_pages_size', '3': 2, '4': 1, '5': 13, '10': 'mediaPagesSize'},
-    const {'1': 'video_duration_in_millis', '3': 3, '4': 1, '5': 13, '10': 'videoDurationInMillis'},
+    const {'1': 'video_duration_in_millis', '3': 2, '4': 1, '5': 13, '10': 'videoDurationInMillis'},
+    const {'1': 'media_page_data_ranges', '3': 3, '4': 3, '5': 11, '6': '.DataRange', '10': 'mediaPageDataRanges'},
+    const {'1': 'videoResourcesDataRanges', '3': 4, '4': 3, '5': 11, '6': '.VideoHeader.VideoResourcesDataRangesEntry', '10': 'videoResourcesDataRanges'},
   ],
+  '3': const [VideoHeader_VideoResourcesDataRangesEntry$json],
+};
+
+const VideoHeader_VideoResourcesDataRangesEntry$json = const {
+  '1': 'VideoResourcesDataRangesEntry',
+  '2': const [
+    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    const {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.DataRange', '10': 'value'},
+  ],
+  '7': const {'7': true},
 };
 
 const MediaPageHeader$json = const {
@@ -20,16 +31,21 @@ const MediaPageHeader$json = const {
     const {'1': 'media_page_number', '3': 1, '4': 1, '5': 13, '10': 'mediaPageNumber'},
     const {'1': 'page_duration_in_millis', '3': 2, '4': 1, '5': 13, '10': 'pageDurationInMillis'},
     const {'1': 'vectorFrame', '3': 3, '4': 1, '5': 11, '6': '.RenderingInstructions', '10': 'vectorFrame'},
-    const {'1': 'audio_data_section_size', '3': 4, '4': 1, '5': 13, '10': 'audioDataSectionSize'},
   ],
 };
 
 const VideoResourceHeader$json = const {
   '1': 'VideoResourceHeader',
   '2': const [
-    const {'1': 'resource_id', '3': 1, '4': 1, '5': 9, '10': 'resourceId'},
     const {'1': 'mime_type', '3': 2, '4': 1, '5': 9, '10': 'mimeType'},
-    const {'1': 'data_section_size', '3': 3, '4': 1, '5': 13, '10': 'dataSectionSize'},
+  ],
+};
+
+const DataRange$json = const {
+  '1': 'DataRange',
+  '2': const [
+    const {'1': 'start', '3': 1, '4': 1, '5': 13, '10': 'start'},
+    const {'1': 'end', '3': 2, '4': 1, '5': 13, '10': 'end'},
   ],
 };
 

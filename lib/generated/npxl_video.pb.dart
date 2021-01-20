@@ -16,26 +16,31 @@ export 'npxl_video.pbenum.dart';
 class VideoHeader extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'VideoHeader', createEmptyInstance: create)
     ..aOM<AudioProperties>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'audioProperties', subBuilder: AudioProperties.create)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mediaPagesSize', $pb.PbFieldType.OU3)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoDurationInMillis', $pb.PbFieldType.OU3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoDurationInMillis', $pb.PbFieldType.OU3)
+    ..pc<DataRange>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mediaPageDataRanges', $pb.PbFieldType.PM, subBuilder: DataRange.create)
+    ..m<$core.String, DataRange>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoResourcesDataRanges', protoName: 'videoResourcesDataRanges', entryClassName: 'VideoHeader.VideoResourcesDataRangesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: DataRange.create)
     ..hasRequiredFields = false
   ;
 
   VideoHeader._() : super();
   factory VideoHeader({
     AudioProperties audioProperties,
-    $core.int mediaPagesSize,
     $core.int videoDurationInMillis,
+    $core.Iterable<DataRange> mediaPageDataRanges,
+    $core.Map<$core.String, DataRange> videoResourcesDataRanges,
   }) {
     final _result = create();
     if (audioProperties != null) {
       _result.audioProperties = audioProperties;
     }
-    if (mediaPagesSize != null) {
-      _result.mediaPagesSize = mediaPagesSize;
-    }
     if (videoDurationInMillis != null) {
       _result.videoDurationInMillis = videoDurationInMillis;
+    }
+    if (mediaPageDataRanges != null) {
+      _result.mediaPageDataRanges.addAll(mediaPageDataRanges);
+    }
+    if (videoResourcesDataRanges != null) {
+      _result.videoResourcesDataRanges.addAll(videoResourcesDataRanges);
     }
     return _result;
   }
@@ -72,22 +77,19 @@ class VideoHeader extends $pb.GeneratedMessage {
   AudioProperties ensureAudioProperties() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.int get mediaPagesSize => $_getIZ(1);
+  $core.int get videoDurationInMillis => $_getIZ(1);
   @$pb.TagNumber(2)
-  set mediaPagesSize($core.int v) { $_setUnsignedInt32(1, v); }
+  set videoDurationInMillis($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMediaPagesSize() => $_has(1);
+  $core.bool hasVideoDurationInMillis() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMediaPagesSize() => clearField(2);
+  void clearVideoDurationInMillis() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get videoDurationInMillis => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set videoDurationInMillis($core.int v) { $_setUnsignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasVideoDurationInMillis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearVideoDurationInMillis() => clearField(3);
+  $core.List<DataRange> get mediaPageDataRanges => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $core.Map<$core.String, DataRange> get videoResourcesDataRanges => $_getMap(3);
 }
 
 class MediaPageHeader extends $pb.GeneratedMessage {
@@ -95,7 +97,6 @@ class MediaPageHeader extends $pb.GeneratedMessage {
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mediaPageNumber', $pb.PbFieldType.OU3)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageDurationInMillis', $pb.PbFieldType.OU3)
     ..aOM<RenderingInstructions>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'vectorFrame', protoName: 'vectorFrame', subBuilder: RenderingInstructions.create)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'audioDataSectionSize', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -104,7 +105,6 @@ class MediaPageHeader extends $pb.GeneratedMessage {
     $core.int mediaPageNumber,
     $core.int pageDurationInMillis,
     RenderingInstructions vectorFrame,
-    $core.int audioDataSectionSize,
   }) {
     final _result = create();
     if (mediaPageNumber != null) {
@@ -115,9 +115,6 @@ class MediaPageHeader extends $pb.GeneratedMessage {
     }
     if (vectorFrame != null) {
       _result.vectorFrame = vectorFrame;
-    }
-    if (audioDataSectionSize != null) {
-      _result.audioDataSectionSize = audioDataSectionSize;
     }
     return _result;
   }
@@ -170,40 +167,21 @@ class MediaPageHeader extends $pb.GeneratedMessage {
   void clearVectorFrame() => clearField(3);
   @$pb.TagNumber(3)
   RenderingInstructions ensureVectorFrame() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.int get audioDataSectionSize => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set audioDataSectionSize($core.int v) { $_setUnsignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasAudioDataSectionSize() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearAudioDataSectionSize() => clearField(4);
 }
 
 class VideoResourceHeader extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'VideoResourceHeader', createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'resourceId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mimeType')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dataSectionSize', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
   VideoResourceHeader._() : super();
   factory VideoResourceHeader({
-    $core.String resourceId,
     $core.String mimeType,
-    $core.int dataSectionSize,
   }) {
     final _result = create();
-    if (resourceId != null) {
-      _result.resourceId = resourceId;
-    }
     if (mimeType != null) {
       _result.mimeType = mimeType;
-    }
-    if (dataSectionSize != null) {
-      _result.dataSectionSize = dataSectionSize;
     }
     return _result;
   }
@@ -228,32 +206,75 @@ class VideoResourceHeader extends $pb.GeneratedMessage {
   static VideoResourceHeader getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VideoResourceHeader>(create);
   static VideoResourceHeader _defaultInstance;
 
-  @$pb.TagNumber(1)
-  $core.String get resourceId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resourceId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResourceId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResourceId() => clearField(1);
-
   @$pb.TagNumber(2)
-  $core.String get mimeType => $_getSZ(1);
+  $core.String get mimeType => $_getSZ(0);
   @$pb.TagNumber(2)
-  set mimeType($core.String v) { $_setString(1, v); }
+  set mimeType($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMimeType() => $_has(1);
+  $core.bool hasMimeType() => $_has(0);
   @$pb.TagNumber(2)
   void clearMimeType() => clearField(2);
+}
 
-  @$pb.TagNumber(3)
-  $core.int get dataSectionSize => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set dataSectionSize($core.int v) { $_setUnsignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasDataSectionSize() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearDataSectionSize() => clearField(3);
+class DataRange extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DataRange', createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'start', $pb.PbFieldType.OU3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'end', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  DataRange._() : super();
+  factory DataRange({
+    $core.int start,
+    $core.int end,
+  }) {
+    final _result = create();
+    if (start != null) {
+      _result.start = start;
+    }
+    if (end != null) {
+      _result.end = end;
+    }
+    return _result;
+  }
+  factory DataRange.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DataRange.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DataRange clone() => DataRange()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DataRange copyWith(void Function(DataRange) updates) => super.copyWith((message) => updates(message as DataRange)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DataRange create() => DataRange._();
+  DataRange createEmptyInstance() => create();
+  static $pb.PbList<DataRange> createRepeated() => $pb.PbList<DataRange>();
+  @$core.pragma('dart2js:noInline')
+  static DataRange getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DataRange>(create);
+  static DataRange _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get start => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set start($core.int v) { $_setUnsignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStart() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStart() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get end => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set end($core.int v) { $_setUnsignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEnd() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEnd() => clearField(2);
 }
 
 class AudioProperties extends $pb.GeneratedMessage {

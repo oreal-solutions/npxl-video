@@ -1,4 +1,4 @@
-/// Revision 8.0
+/// Revision 9.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -137,13 +137,20 @@ syntax = "proto3";
 message VideoHeader {
   AudioProperties audio_properties = 1;
 
-  // The number of bytes the media Pages section occupies.
-  uint32 media_pages_size = 2;
-
   // The length of the video in milliseconds.
   //
   // This is the sum of all the durations of the media pages.
-  uint32 video_duration_in_millis = 3;
+  uint32 video_duration_in_millis = 2;
+
+  // Byte data ranges for the Media Pages.
+  //
+  // The first DataRange is for the first media Page, the second for the
+  // second Media Page, and so on.
+  repeated DataRange media_page_data_ranges = 3;
+
+  // A map of video resource ids to the byte data range for the video resource
+  // the id references.
+  map<string, DataRange> videoResourcesDataRanges = 4;
 }
 
 // A Media Page Header.
@@ -171,16 +178,10 @@ message MediaPageHeader {
 
   // The vector frame for this media page.
   RenderingInstructions vectorFrame = 3;
-
-  // The size, in bytes, of the compressed audio data section.
-  uint32 audio_data_section_size = 4;
 }
 
 // A video resource.
 message VideoResourceHeader {
-  // A unique id that identifies this resource.
-  string resource_id = 1;
-
   // The mime type of the resource.
   //
   // As of this revision of the npxl video format, resource decoders can expect
@@ -189,12 +190,16 @@ message VideoResourceHeader {
   //    2. image/*
   //          where * can be any image format, e.g png, jpeg, etc.
   string mime_type = 2;
-
-  // The size, in bytes, of the video resource data section.
-  uint32 data_section_size = 3;
 }
 
 /* ------- Supporting data structures ------- */
+
+// Represents a data range, in bytes, with an inclusive start index and an
+// exclusive end index.
+message DataRange {
+  uint32 start = 1;
+  uint32 end = 2;
+}
 
 // The parameters required by the audio decoder to decode the audio frames in
 // pages.
