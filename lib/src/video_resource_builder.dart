@@ -20,19 +20,13 @@ class VideoResourceBuilder extends SectionBuilder {
   @override
   Future<void> buildToOutputStream(ByteOutputStream out) async {
     final resourceHeaderData = VideoResourceHeader(
-      resourceId: _resourceId,
       mimeType: _resourceMimeType,
-      dataSectionSize: _resourceData.numberOfReadableBytes,
     ).writeToBuffer();
 
     await out
         .writeBytes(convertUnsignedShortToBytes(resourceHeaderData.length));
     await out.writeBytes(resourceHeaderData);
     await copyInputStreamToOutputStream(_resourceData, out);
-  }
-
-  void setResourceId(String resourceId) {
-    _resourceId = resourceId;
   }
 
   void setResourceMimeType(String mimeType) {
@@ -48,7 +42,6 @@ class VideoResourceBuilder extends SectionBuilder {
     _resourceData = resourceDataInputStream;
   }
 
-  String _resourceId = '';
   String _resourceMimeType = '';
   RandomAccessByteInputStream _resourceData =
       InMemoryRandomAccessByteInputStream(Uint8List(0));

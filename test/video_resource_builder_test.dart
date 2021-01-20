@@ -19,8 +19,7 @@ void main() {
         await instance.buildToOutputStream(ret);
         final resourceHeaderLength = ret.data.sublist(0, 2);
 
-        final expectedVideoResourceHeader = VideoResourceHeader(
-            dataSectionSize: 0, resourceId: '', mimeType: '');
+        final expectedVideoResourceHeader = VideoResourceHeader(mimeType: '');
 
         expect(getUnsignedShortFromUint8List(resourceHeaderLength),
             expectedVideoResourceHeader.writeToBuffer().length);
@@ -36,18 +35,6 @@ void main() {
       }
 
       test(
-          "Should build the instance with the resourceId being the last value passed to setResourceId",
-          () async {
-        final instance = VideoResourceBuilder();
-        instance.setResourceId("abc");
-
-        final ret = InMemoryByteOutputStream();
-        await instance.buildToOutputStream(ret);
-
-        expect(
-            getVideoResourceHeaderFromSectionData(ret.data).resourceId, 'abc');
-      });
-      test(
           "Should build the instance with the resource mimeType being the last value passed to setResourceMimeType",
           () async {
         final instance = VideoResourceBuilder();
@@ -58,17 +45,7 @@ void main() {
 
         expect(getVideoResourceHeaderFromSectionData(ret.data).mimeType, 'abc');
       });
-      test("Should build the instance with the correct dataSectionSize",
-          () async {
-        final instance = VideoResourceBuilder();
-        instance.setResourceData(Uint8List.fromList([0xaa, 0xbb]));
 
-        final ret = InMemoryByteOutputStream();
-        await instance.buildToOutputStream(ret);
-
-        expect(
-            getVideoResourceHeaderFromSectionData(ret.data).dataSectionSize, 2);
-      });
       test(
           "Should build the instance with the resource data being the last data passed to setResourceDataFromInputStream",
           () async {

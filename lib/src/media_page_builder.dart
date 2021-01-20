@@ -23,7 +23,6 @@ class MediaPageBuilder implements SectionBuilder {
       mediaPageNumber: _mediaPageNumber,
       pageDurationInMillis: _mediaPageDurationInMillis,
       vectorFrame: _vectorFrame,
-      audioDataSectionSize: _compressedAudioData.length,
     ).writeToBuffer();
 
     final checksummedPart = InMemoryByteOutputStream();

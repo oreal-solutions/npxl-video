@@ -27,7 +27,6 @@ void main() {
           () async {
         final expectedVideoHeaderData = VideoHeader(
           audioProperties: AudioProperties(frameSize: 120),
-          mediaPagesSize: 0,
           videoDurationInMillis: 0,
         ).writeToBuffer();
         final expectedVideoHeaderLength = expectedVideoHeaderData.length;
@@ -77,16 +76,97 @@ void main() {
           expect(getVideoHeaderFromReturnedData(ret.data).videoDurationInMillis,
               40);
         });
-        test("Should have the correct mediaPagesSize", () async {
+
+        test(
+            "Should have the mediaPageDataRanges being the last value set with setMediaPageDataRanges",
+            () async {
           final instance = VideoBuilder();
-          final mediaPages = InMemoryRandomAccessByteInputStream(
-              Uint8List.fromList([0xaa, 0xbb]));
-          instance.setMediaPagesInputStream(mediaPages);
+          instance.setMediaPageDataRanges([DataRange(start: 0, end: 2)]);
+          instance.setMediaPagesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(2)));
 
           final ret = InMemoryByteOutputStream();
           await instance.buildToOutputStream(ret);
 
-          expect(getVideoHeaderFromReturnedData(ret.data).mediaPagesSize, 2);
+          expect(getVideoHeaderFromReturnedData(ret.data).mediaPageDataRanges,
+              [DataRange(start: 0, end: 2)]);
+        });
+        test(
+            "Should have the videoResourceDataRanges being the last value set with setVideoResourceDataRanges",
+            () async {
+          final instance = VideoBuilder();
+          instance
+              .setVideoResourceDataRanges({'abc': DataRange(start: 0, end: 2)});
+          instance.setVideoResourcesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(2)));
+
+          final ret = InMemoryByteOutputStream();
+          await instance.buildToOutputStream(ret);
+
+          expect(
+              getVideoHeaderFromReturnedData(ret.data).videoResourceDataRanges,
+              {'abc': DataRange(start: 0, end: 2)});
+        });
+      });
+
+      group(
+          "When there is no mediaPageDataRanges set but the given mediaPagesInputStream is not empty",
+          () {
+        test("Should throw StateError", () {
+          final instance = VideoBuilder();
+          instance.setMediaPagesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(2)));
+
+          final ret = InMemoryByteOutputStream();
+          final run = () => instance.buildToOutputStream(ret);
+
+          expect(run, throwsStateError);
+        });
+      });
+      group(
+          "When there are mediaPageDataRanges set but the given mediaPagesInputStream is empty",
+          () {
+        test("Should throw StateError", () {
+          final instance = VideoBuilder();
+          instance.setMediaPageDataRanges([DataRange(start: 0, end: 2)]);
+          instance.setMediaPagesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(0)));
+
+          final ret = InMemoryByteOutputStream();
+          final run = () => instance.buildToOutputStream(ret);
+
+          expect(run, throwsStateError);
+        });
+      });
+      group(
+          "When there are no videoResourceDataRanges set but the given videoResourcesInputStream is not empty",
+          () {
+        test("Should throw StateError", () {
+          final instance = VideoBuilder();
+          instance.setVideoResourcesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(2)));
+
+          final ret = InMemoryByteOutputStream();
+          final run = () => instance.buildToOutputStream(ret);
+
+          expect(run, throwsStateError);
+        });
+      });
+
+      group(
+          "When there are videoResourceDataRanges set but the given video resources input stream is empty",
+          () {
+        test("Should throw StateError", () {
+          final instance = VideoBuilder();
+          instance
+              .setVideoResourceDataRanges({'abc': DataRange(start: 0, end: 2)});
+          instance.setVideoResourcesInputStream(
+              InMemoryRandomAccessByteInputStream(Uint8List(0)));
+
+          final ret = InMemoryByteOutputStream();
+          final run = () => instance.buildToOutputStream(ret);
+
+          expect(run, throwsStateError);
         });
       });
 
@@ -95,8 +175,9 @@ void main() {
           () async {
         final expectedVideoHeaderData = VideoHeader(
           audioProperties: AudioProperties(),
-          mediaPagesSize: 3,
           videoDurationInMillis: 0,
+          mediaPageDataRanges: [DataRange(start: 0, end: 3)],
+          videoResourceDataRanges: {},
         ).writeToBuffer();
         final expectedVideoHeaderLength = expectedVideoHeaderData.length;
 
@@ -104,6 +185,7 @@ void main() {
         final mediaPages = InMemoryRandomAccessByteInputStream(
             Uint8List.fromList([0xaa, 0xbb, 0xcc]));
         instance.setMediaPagesInputStream(mediaPages);
+        instance.setMediaPageDataRanges([DataRange(start: 0, end: 3)]);
 
         final ret = InMemoryByteOutputStream();
         await instance.buildToOutputStream(ret);
@@ -117,8 +199,9 @@ void main() {
           () async {
         final expectedVideoHeaderData = VideoHeader(
           audioProperties: AudioProperties(),
-          mediaPagesSize: 0,
           videoDurationInMillis: 0,
+          mediaPageDataRanges: [],
+          videoResourceDataRanges: {'abc': DataRange(start: 0, end: 3)},
         ).writeToBuffer();
         final expectedVideoHeaderLength = expectedVideoHeaderData.length;
 
@@ -126,6 +209,8 @@ void main() {
         final videoResources = InMemoryRandomAccessByteInputStream(
             Uint8List.fromList([0xaa, 0xbb, 0xcc]));
         instance.setVideoResourcesInputStream(videoResources);
+        instance
+            .setVideoResourceDataRanges({'abc': DataRange(start: 0, end: 3)});
 
         final ret = InMemoryByteOutputStream();
         await instance.buildToOutputStream(ret);

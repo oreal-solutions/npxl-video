@@ -14,7 +14,6 @@ void main() {
           "Should build the instance with the checksum value equal to that computed by data_validation.dart/computeCRC16Checksum for the checksummed part of the media page",
           () async {
         final mediaPageHeaderData = MediaPageHeader(
-                audioDataSectionSize: 2,
                 vectorFrame: RenderingInstructions(pointer: Pointer()),
                 pageDurationInMillis: 3,
                 mediaPageNumber: 1)
