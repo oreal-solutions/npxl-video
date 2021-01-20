@@ -11,13 +11,13 @@ const VideoHeader$json = const {
     const {'1': 'audio_properties', '3': 1, '4': 1, '5': 11, '6': '.AudioProperties', '10': 'audioProperties'},
     const {'1': 'video_duration_in_millis', '3': 2, '4': 1, '5': 13, '10': 'videoDurationInMillis'},
     const {'1': 'media_page_data_ranges', '3': 3, '4': 3, '5': 11, '6': '.DataRange', '10': 'mediaPageDataRanges'},
-    const {'1': 'videoResourcesDataRanges', '3': 4, '4': 3, '5': 11, '6': '.VideoHeader.VideoResourcesDataRangesEntry', '10': 'videoResourcesDataRanges'},
+    const {'1': 'videoResourceDataRanges', '3': 4, '4': 3, '5': 11, '6': '.VideoHeader.VideoResourceDataRangesEntry', '10': 'videoResourceDataRanges'},
   ],
-  '3': const [VideoHeader_VideoResourcesDataRangesEntry$json],
+  '3': const [VideoHeader_VideoResourceDataRangesEntry$json],
 };
 
-const VideoHeader_VideoResourcesDataRangesEntry$json = const {
-  '1': 'VideoResourcesDataRangesEntry',
+const VideoHeader_VideoResourceDataRangesEntry$json = const {
+  '1': 'VideoResourceDataRangesEntry',
   '2': const [
     const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
     const {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.DataRange', '10': 'value'},

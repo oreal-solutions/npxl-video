@@ -1,4 +1,4 @@
-/// Revision 9.0
+/// Revision 10.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -150,7 +150,7 @@ message VideoHeader {
 
   // A map of video resource ids to the byte data range for the video resource
   // the id references.
-  map<string, DataRange> videoResourcesDataRanges = 4;
+  map<string, DataRange> videoResourceDataRanges = 4;
 }
 
 // A Media Page Header.

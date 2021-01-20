@@ -18,7 +18,7 @@ class VideoHeader extends $pb.GeneratedMessage {
     ..aOM<AudioProperties>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'audioProperties', subBuilder: AudioProperties.create)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoDurationInMillis', $pb.PbFieldType.OU3)
     ..pc<DataRange>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mediaPageDataRanges', $pb.PbFieldType.PM, subBuilder: DataRange.create)
-    ..m<$core.String, DataRange>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoResourcesDataRanges', protoName: 'videoResourcesDataRanges', entryClassName: 'VideoHeader.VideoResourcesDataRangesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: DataRange.create)
+    ..m<$core.String, DataRange>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'videoResourceDataRanges', protoName: 'videoResourceDataRanges', entryClassName: 'VideoHeader.VideoResourceDataRangesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: DataRange.create)
     ..hasRequiredFields = false
   ;
 
@@ -27,7 +27,7 @@ class VideoHeader extends $pb.GeneratedMessage {
     AudioProperties audioProperties,
     $core.int videoDurationInMillis,
     $core.Iterable<DataRange> mediaPageDataRanges,
-    $core.Map<$core.String, DataRange> videoResourcesDataRanges,
+    $core.Map<$core.String, DataRange> videoResourceDataRanges,
   }) {
     final _result = create();
     if (audioProperties != null) {
@@ -39,8 +39,8 @@ class VideoHeader extends $pb.GeneratedMessage {
     if (mediaPageDataRanges != null) {
       _result.mediaPageDataRanges.addAll(mediaPageDataRanges);
     }
-    if (videoResourcesDataRanges != null) {
-      _result.videoResourcesDataRanges.addAll(videoResourcesDataRanges);
+    if (videoResourceDataRanges != null) {
+      _result.videoResourceDataRanges.addAll(videoResourceDataRanges);
     }
     return _result;
   }
@@ -89,7 +89,7 @@ class VideoHeader extends $pb.GeneratedMessage {
   $core.List<DataRange> get mediaPageDataRanges => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.Map<$core.String, DataRange> get videoResourcesDataRanges => $_getMap(3);
+  $core.Map<$core.String, DataRange> get videoResourceDataRanges => $_getMap(3);
 }
 
 class MediaPageHeader extends $pb.GeneratedMessage {
