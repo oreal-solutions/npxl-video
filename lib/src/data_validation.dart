@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:crclib/crclib.dart';
 import 'package:crclib/catalog.dart';
 
 /// Computes a CRC16/ARC checksum for the given data

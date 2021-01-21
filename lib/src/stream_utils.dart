@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:npxl_video/src/byte_output_stream.dart';
 import 'package:npxl_video/src/random_access_byte_input_stream.dart';
 
