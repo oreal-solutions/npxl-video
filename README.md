@@ -1,6 +1,6 @@
 # No Pixels Video (npxl video)
 
-![Tests](https://github.com/oreal-solutions/npxl-video/workflows/dart/badge.svg)
+![Tests](https://github.com/oreal-solutions/npxl-video/workflows/Tests/badge.svg)
 
 This library is the reference implementation of the [npxl video format](docs/introduction.md). It serves only the
 purpose of reading and writing npxl files and is, therefore, written in pure dart with no platform specific functionality. It does not implement the capability to play the video format on any
