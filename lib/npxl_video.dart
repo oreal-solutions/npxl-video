@@ -11,3 +11,4 @@ export 'src/revision.dart';
 export 'src/stream_utils.dart';
 export 'src/video_builder.dart';
 export 'src/video_resource_builder.dart';
+export 'generated/npxl_video.pb.dart';
