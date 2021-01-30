@@ -53,16 +53,16 @@ Future<ReadableVideoResource> readVideoResource(
 
   return ReadableVideoResource(
     VideoResourceHeader.fromBuffer(headerBinaryData),
-    _SkippingRandomAccessByteInputStream(
+    SkippingRandomAccessByteInputStream(
         2 + headerSize, videoResourceSubSection),
   );
 }
 
-class _SkippingRandomAccessByteInputStream
+class SkippingRandomAccessByteInputStream
     implements RandomAccessByteInputStream {
   final int skip;
   final RandomAccessByteInputStream source;
-  _SkippingRandomAccessByteInputStream(this.skip, this.source);
+  SkippingRandomAccessByteInputStream(this.skip, this.source);
 
   @override
   int get numberOfReadableBytes => source.numberOfReadableBytes - skip;
