@@ -1,0 +1,9 @@
+name: scripts
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  npxl_video:
+    path: ../
+  meta: ^1.2.4
