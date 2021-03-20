@@ -10,6 +10,26 @@ import 'package:npxl_video/src/section_builder.dart';
 import 'package:npxl_video/src/stream_utils.dart';
 
 class MediaPageBuilder implements SectionBuilder {
+  // TODO(Batandwa): Clean
+  Uint8List buildSync() {
+    List<int> out = <int>[];
+    final mediaPageHeaderData = makeMediaPageHeader();
+
+    final checksummedPart = <int>[];
+    checksummedPart
+        .addAll(convertUnsignedShortToBytes(mediaPageHeaderData.length));
+    checksummedPart.addAll(mediaPageHeaderData);
+    checksummedPart.addAll(_compressedAudioData);
+    final checksummedPartByteData = Uint8List.fromList(checksummedPart);
+
+    final checksumValue = computeCRC16Checksum(checksummedPartByteData);
+
+    out.addAll(convertUnsignedShortToBytes(checksumValue));
+    out.addAll(checksummedPart);
+
+    return Uint8List.fromList(out);
+  }
+
   @override
   Future<Uint8List> build() async {
     final ret = InMemoryByteOutputStream();
@@ -19,11 +39,7 @@ class MediaPageBuilder implements SectionBuilder {
 
   @override
   Future<void> buildToOutputStream(ByteOutputStream out) async {
-    final mediaPageHeaderData = MediaPageHeader(
-      mediaPageNumber: _mediaPageNumber,
-      pageDurationInMillis: _mediaPageDurationInMillis,
-      vectorFrame: _vectorFrame,
-    ).writeToBuffer();
+    final mediaPageHeaderData = makeMediaPageHeader();
 
     final checksummedPart = InMemoryByteOutputStream();
     await checksummedPart
@@ -37,6 +53,14 @@ class MediaPageBuilder implements SectionBuilder {
     await out.writeBytes(convertUnsignedShortToBytes(checksumValue));
     await copyInputStreamToOutputStream(
         InMemoryRandomAccessByteInputStream(checksummedPartData), out);
+  }
+
+  Uint8List makeMediaPageHeader() {
+    return MediaPageHeader(
+      mediaPageNumber: _mediaPageNumber,
+      pageDurationInMillis: _mediaPageDurationInMillis,
+      vectorFrame: _vectorFrame,
+    ).writeToBuffer();
   }
 
   void setMediaPageNumber(int mediaPageNumber) {

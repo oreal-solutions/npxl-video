@@ -51,6 +51,14 @@ void main() {
 
         expect(ret.data, await instance.build());
       });
+      test("Should return the same data as buildSync()", () async {
+        final instance = MediaPageBuilder();
+
+        final ret = InMemoryByteOutputStream();
+        await instance.buildToOutputStream(ret);
+
+        expect(ret.data, instance.buildSync());
+      });
     });
   });
 }

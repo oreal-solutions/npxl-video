@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:npxl_video/npxl_video.dart' as npxl;
 import 'package:meta/meta.dart';
-import './shared_utils.dart';
+import './engine/shared_utils.dart';
 
 Future<void> main() {
   return makeTestVideo();
@@ -23,13 +23,6 @@ Future<void> makeTestVideo() async {
     width: 20,
     topLeftCorner: npxl.Point(dx: 0, dy: 0),
   );
-
-  npxl.PathPoint makePathPointAt(double dx, double dy) {
-    return npxl.PathPoint(
-      coordinates: npxl.Point(dx: dx, dy: dy),
-      pressure: 1,
-    );
-  }
 
   Iterable<npxl.PathPoint> squarePathAtTopLeftCorner(
       double cornerX, double cornerY) {
