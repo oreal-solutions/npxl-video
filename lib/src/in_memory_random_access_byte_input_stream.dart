@@ -9,7 +9,6 @@ class InMemoryRandomAccessByteInputStream
   InMemoryRandomAccessByteInputStream(this.data);
 
   @override
-  // TODO: implement numberOfReadableBytes
   int get numberOfReadableBytes => data.length;
 
   @override
