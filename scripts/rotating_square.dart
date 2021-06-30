@@ -30,8 +30,7 @@ Future<void> main() async {
   // 60Hz render rate
   final frameTimeInMillis = 16;
 
-  // final video = await simulation.renderToVideo(frameTimeInMillis, 60 * 60 * 5,
-  final video = await simulation.renderToVideo(frameTimeInMillis, 60 * 20,
+  final video = await simulation.renderToVideo(frameTimeInMillis, 60 * 60 * 5,
       Viewport(topLeftCorner: Point(dx: 0, dy: 0), width: 1280, height: 720));
 
   File('rotating_square.npxl').writeAsBytesSync(video.toList());
