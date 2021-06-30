@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: npxl_video.proto
 //
-// @dart = 2.7
+// @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME
@@ -23,7 +23,7 @@ class Pointer_PointerType extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, Pointer_PointerType> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Pointer_PointerType valueOf($core.int value) => _byValue[value];
+  static Pointer_PointerType? valueOf($core.int value) => _byValue[value];
 
   const Pointer_PointerType._($core.int v, $core.String n) : super(v, n);
 }

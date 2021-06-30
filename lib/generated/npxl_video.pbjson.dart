@@ -2,9 +2,13 @@
 //  Generated code. Do not modify.
 //  source: npxl_video.proto
 //
-// @dart = 2.7
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
+// @dart = 2.12
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
 
+import 'dart:core' as $core;
+import 'dart:convert' as $convert;
+import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use videoHeaderDescriptor instead')
 const VideoHeader$json = const {
   '1': 'VideoHeader',
   '2': const [
@@ -16,6 +20,7 @@ const VideoHeader$json = const {
   '3': const [VideoHeader_VideoResourceDataRangesEntry$json],
 };
 
+@$core.Deprecated('Use videoHeaderDescriptor instead')
 const VideoHeader_VideoResourceDataRangesEntry$json = const {
   '1': 'VideoResourceDataRangesEntry',
   '2': const [
@@ -25,6 +30,9 @@ const VideoHeader_VideoResourceDataRangesEntry$json = const {
   '7': const {'7': true},
 };
 
+/// Descriptor for `VideoHeader`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List videoHeaderDescriptor = $convert.base64Decode('CgtWaWRlb0hlYWRlchI7ChBhdWRpb19wcm9wZXJ0aWVzGAEgASgLMhAuQXVkaW9Qcm9wZXJ0aWVzUg9hdWRpb1Byb3BlcnRpZXMSNwoYdmlkZW9fZHVyYXRpb25faW5fbWlsbGlzGAIgASgNUhV2aWRlb0R1cmF0aW9uSW5NaWxsaXMSPwoWbWVkaWFfcGFnZV9kYXRhX3JhbmdlcxgDIAMoCzIKLkRhdGFSYW5nZVITbWVkaWFQYWdlRGF0YVJhbmdlcxJjChd2aWRlb1Jlc291cmNlRGF0YVJhbmdlcxgEIAMoCzIpLlZpZGVvSGVhZGVyLlZpZGVvUmVzb3VyY2VEYXRhUmFuZ2VzRW50cnlSF3ZpZGVvUmVzb3VyY2VEYXRhUmFuZ2VzGlYKHFZpZGVvUmVzb3VyY2VEYXRhUmFuZ2VzRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSIAoFdmFsdWUYAiABKAsyCi5EYXRhUmFuZ2VSBXZhbHVlOgI4AQ==');
+@$core.Deprecated('Use mediaPageHeaderDescriptor instead')
 const MediaPageHeader$json = const {
   '1': 'MediaPageHeader',
   '2': const [
@@ -34,6 +42,9 @@ const MediaPageHeader$json = const {
   ],
 };
 
+/// Descriptor for `MediaPageHeader`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mediaPageHeaderDescriptor = $convert.base64Decode('Cg9NZWRpYVBhZ2VIZWFkZXISKgoRbWVkaWFfcGFnZV9udW1iZXIYASABKA1SD21lZGlhUGFnZU51bWJlchI1ChdwYWdlX2R1cmF0aW9uX2luX21pbGxpcxgCIAEoDVIUcGFnZUR1cmF0aW9uSW5NaWxsaXMSOAoLdmVjdG9yRnJhbWUYAyABKAsyFi5SZW5kZXJpbmdJbnN0cnVjdGlvbnNSC3ZlY3RvckZyYW1l');
+@$core.Deprecated('Use videoResourceHeaderDescriptor instead')
 const VideoResourceHeader$json = const {
   '1': 'VideoResourceHeader',
   '2': const [
@@ -41,6 +52,9 @@ const VideoResourceHeader$json = const {
   ],
 };
 
+/// Descriptor for `VideoResourceHeader`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List videoResourceHeaderDescriptor = $convert.base64Decode('ChNWaWRlb1Jlc291cmNlSGVhZGVyEhsKCW1pbWVfdHlwZRgCIAEoCVIIbWltZVR5cGU=');
+@$core.Deprecated('Use dataRangeDescriptor instead')
 const DataRange$json = const {
   '1': 'DataRange',
   '2': const [
@@ -49,6 +63,9 @@ const DataRange$json = const {
   ],
 };
 
+/// Descriptor for `DataRange`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List dataRangeDescriptor = $convert.base64Decode('CglEYXRhUmFuZ2USFAoFc3RhcnQYASABKA1SBXN0YXJ0EhAKA2VuZBgCIAEoDVIDZW5k');
+@$core.Deprecated('Use audioPropertiesDescriptor instead')
 const AudioProperties$json = const {
   '1': 'AudioProperties',
   '2': const [
@@ -58,6 +75,9 @@ const AudioProperties$json = const {
   ],
 };
 
+/// Descriptor for `AudioProperties`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List audioPropertiesDescriptor = $convert.base64Decode('Cg9BdWRpb1Byb3BlcnRpZXMSIwoNc2FtcGxpbmdfcmF0ZRgBIAEoDVIMc2FtcGxpbmdSYXRlEiwKEm51bWJlcl9vZl9jaGFubmVscxgCIAEoDVIQbnVtYmVyT2ZDaGFubmVscxIdCgpmcmFtZV9zaXplGAMgASgNUglmcmFtZVNpemU=');
+@$core.Deprecated('Use colorDescriptor instead')
 const Color$json = const {
   '1': 'Color',
   '2': const [
@@ -65,6 +85,9 @@ const Color$json = const {
   ],
 };
 
+/// Descriptor for `Color`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List colorDescriptor = $convert.base64Decode('CgVDb2xvchIUCgV2YWx1ZRgBIAEoDVIFdmFsdWU=');
+@$core.Deprecated('Use pointDescriptor instead')
 const Point$json = const {
   '1': 'Point',
   '2': const [
@@ -73,6 +96,9 @@ const Point$json = const {
   ],
 };
 
+/// Descriptor for `Point`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pointDescriptor = $convert.base64Decode('CgVQb2ludBIOCgJkeBgBIAEoAVICZHgSDgoCZHkYAiABKAFSAmR5');
+@$core.Deprecated('Use pathPointDescriptor instead')
 const PathPoint$json = const {
   '1': 'PathPoint',
   '2': const [
@@ -81,6 +107,9 @@ const PathPoint$json = const {
   ],
 };
 
+/// Descriptor for `PathPoint`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pathPointDescriptor = $convert.base64Decode('CglQYXRoUG9pbnQSKAoLY29vcmRpbmF0ZXMYASABKAsyBi5Qb2ludFILY29vcmRpbmF0ZXMSGgoIcHJlc3N1cmUYAiABKAFSCHByZXNzdXJl');
+@$core.Deprecated('Use pathDescriptor instead')
 const Path$json = const {
   '1': 'Path',
   '2': const [
@@ -90,6 +119,9 @@ const Path$json = const {
   ],
 };
 
+/// Descriptor for `Path`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pathDescriptor = $convert.base64Decode('CgRQYXRoEhwKBWNvbG9yGAEgASgLMgYuQ29sb3JSBWNvbG9yEiAKC3N0cm9rZVdpZHRoGAIgASgBUgtzdHJva2VXaWR0aBIiCgZwb2ludHMYAyADKAsyCi5QYXRoUG9pbnRSBnBvaW50cw==');
+@$core.Deprecated('Use materialRenderableDescriptor instead')
 const MaterialRenderable$json = const {
   '1': 'MaterialRenderable',
   '2': const [
@@ -101,6 +133,9 @@ const MaterialRenderable$json = const {
   ],
 };
 
+/// Descriptor for `MaterialRenderable`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List materialRenderableDescriptor = $convert.base64Decode('ChJNYXRlcmlhbFJlbmRlcmFibGUSLgoPdG9wX2xlZnRfY29ybmVyGAEgASgLMgYuUG9pbnRSDXRvcExlZnRDb3JuZXISFAoFd2lkdGgYAiABKAFSBXdpZHRoEhYKBmhlaWdodBgDIAEoAVIGaGVpZ2h0Eh8KC3Jlc291cmNlX2lkGAQgASgJUgpyZXNvdXJjZUlkEh8KC3BhZ2VfbnVtYmVyGAUgASgNUgpwYWdlTnVtYmVy');
+@$core.Deprecated('Use pointerDescriptor instead')
 const Pointer$json = const {
   '1': 'Pointer',
   '2': const [
@@ -112,6 +147,7 @@ const Pointer$json = const {
   '4': const [Pointer_PointerType$json],
 };
 
+@$core.Deprecated('Use pointerDescriptor instead')
 const Pointer_PointerType$json = const {
   '1': 'PointerType',
   '2': const [
@@ -122,6 +158,9 @@ const Pointer_PointerType$json = const {
   ],
 };
 
+/// Descriptor for `Pointer`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pointerDescriptor = $convert.base64Decode('CgdQb2ludGVyEigKC2Nvb3JkaW5hdGVzGAEgASgLMgYuUG9pbnRSC2Nvb3JkaW5hdGVzEhwKBWNvbG9yGAIgASgLMgYuQ29sb3JSBWNvbG9yEiAKC3N0cm9rZVdpZHRoGAMgASgBUgtzdHJva2VXaWR0aBIoCgR0eXBlGAQgASgOMhQuUG9pbnRlci5Qb2ludGVyVHlwZVIEdHlwZSI4CgtQb2ludGVyVHlwZRIICgRub25lEAASCgoGY2lyY2xlEAESBwoDcGVuEAISCgoGZmluZ2VyEAM=');
+@$core.Deprecated('Use viewportDescriptor instead')
 const Viewport$json = const {
   '1': 'Viewport',
   '2': const [
@@ -131,6 +170,9 @@ const Viewport$json = const {
   ],
 };
 
+/// Descriptor for `Viewport`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List viewportDescriptor = $convert.base64Decode('CghWaWV3cG9ydBIuCg90b3BfbGVmdF9jb3JuZXIYASABKAsyBi5Qb2ludFINdG9wTGVmdENvcm5lchIUCgV3aWR0aBgCIAEoAVIFd2lkdGgSFgoGaGVpZ2h0GAMgASgBUgZoZWlnaHQ=');
+@$core.Deprecated('Use renderingInstructionsDescriptor instead')
 const RenderingInstructions$json = const {
   '1': 'RenderingInstructions',
   '2': const [
@@ -142,3 +184,5 @@ const RenderingInstructions$json = const {
   ],
 };
 
+/// Descriptor for `RenderingInstructions`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List renderingInstructionsDescriptor = $convert.base64Decode('ChVSZW5kZXJpbmdJbnN0cnVjdGlvbnMSJQoIdmlld3BvcnQYASABKAsyCS5WaWV3cG9ydFIIdmlld3BvcnQSMQoQYmFja2dyb3VuZF9jb2xvchgCIAEoCzIGLkNvbG9yUg9iYWNrZ3JvdW5kQ29sb3ISRQoTbWF0ZXJpYWxSZW5kZXJhYmxlcxgDIAMoCzITLk1hdGVyaWFsUmVuZGVyYWJsZVITbWF0ZXJpYWxSZW5kZXJhYmxlcxIbCgVwYXRocxgEIAMoCzIFLlBhdGhSBXBhdGhzEiIKB3BvaW50ZXIYBSABKAsyCC5Qb2ludGVyUgdwb2ludGVy');

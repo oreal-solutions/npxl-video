@@ -1,4 +1,4 @@
-/// Revision 10.0
+/// Revision 11.0
 ///
 /// This file documents the No Pixels video format (npxl). The npxl video format
 /// is a vector graphics video format. It is specifically designed for
@@ -44,7 +44,7 @@
 /// | 2 bytes of npxl major revision code|
 /// |____________________________________|
 /// |                                    |
-/// |   2 bytes of Video Header length   |
+/// |   4 bytes of Video Header length   |
 /// |____________________________________|
 /// |                                    |
 /// |           Video Header             |

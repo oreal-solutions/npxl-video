@@ -30,7 +30,7 @@ Do the following to generate the dart classes from [npxl_video.proto](docs/npxl_
 protoc -I=docs --dart_out=lib/generated docs/npxl_video.proto
 ```
 
-These instructions are assuming you're on a Windows machine. For more info, pleas refer to [Protocol Buffers for Dart](https://developers.google.com/protocol-buffers/docs/darttutorial#compiling-your-protocol-buffers).
+These instructions are assuming you're on a Windows machine. For more info, please refer to [Protocol Buffers for Dart](https://developers.google.com/protocol-buffers/docs/darttutorial#compiling-your-protocol-buffers).
 
 ## Unit testing
 

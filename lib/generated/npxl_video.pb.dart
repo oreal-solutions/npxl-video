@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: npxl_video.proto
 //
-// @dart = 2.7
+// @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -24,10 +24,10 @@ class VideoHeader extends $pb.GeneratedMessage {
 
   VideoHeader._() : super();
   factory VideoHeader({
-    AudioProperties audioProperties,
-    $core.int videoDurationInMillis,
-    $core.Iterable<DataRange> mediaPageDataRanges,
-    $core.Map<$core.String, DataRange> videoResourceDataRanges,
+    AudioProperties? audioProperties,
+    $core.int? videoDurationInMillis,
+    $core.Iterable<DataRange>? mediaPageDataRanges,
+    $core.Map<$core.String, DataRange>? videoResourceDataRanges,
   }) {
     final _result = create();
     if (audioProperties != null) {
@@ -55,7 +55,7 @@ class VideoHeader extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  VideoHeader copyWith(void Function(VideoHeader) updates) => super.copyWith((message) => updates(message as VideoHeader)); // ignore: deprecated_member_use
+  VideoHeader copyWith(void Function(VideoHeader) updates) => super.copyWith((message) => updates(message as VideoHeader)) as VideoHeader; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static VideoHeader create() => VideoHeader._();
@@ -63,7 +63,7 @@ class VideoHeader extends $pb.GeneratedMessage {
   static $pb.PbList<VideoHeader> createRepeated() => $pb.PbList<VideoHeader>();
   @$core.pragma('dart2js:noInline')
   static VideoHeader getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VideoHeader>(create);
-  static VideoHeader _defaultInstance;
+  static VideoHeader? _defaultInstance;
 
   @$pb.TagNumber(1)
   AudioProperties get audioProperties => $_getN(0);
@@ -102,9 +102,9 @@ class MediaPageHeader extends $pb.GeneratedMessage {
 
   MediaPageHeader._() : super();
   factory MediaPageHeader({
-    $core.int mediaPageNumber,
-    $core.int pageDurationInMillis,
-    RenderingInstructions vectorFrame,
+    $core.int? mediaPageNumber,
+    $core.int? pageDurationInMillis,
+    RenderingInstructions? vectorFrame,
   }) {
     final _result = create();
     if (mediaPageNumber != null) {
@@ -129,7 +129,7 @@ class MediaPageHeader extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MediaPageHeader copyWith(void Function(MediaPageHeader) updates) => super.copyWith((message) => updates(message as MediaPageHeader)); // ignore: deprecated_member_use
+  MediaPageHeader copyWith(void Function(MediaPageHeader) updates) => super.copyWith((message) => updates(message as MediaPageHeader)) as MediaPageHeader; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static MediaPageHeader create() => MediaPageHeader._();
@@ -137,7 +137,7 @@ class MediaPageHeader extends $pb.GeneratedMessage {
   static $pb.PbList<MediaPageHeader> createRepeated() => $pb.PbList<MediaPageHeader>();
   @$core.pragma('dart2js:noInline')
   static MediaPageHeader getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MediaPageHeader>(create);
-  static MediaPageHeader _defaultInstance;
+  static MediaPageHeader? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get mediaPageNumber => $_getIZ(0);
@@ -177,7 +177,7 @@ class VideoResourceHeader extends $pb.GeneratedMessage {
 
   VideoResourceHeader._() : super();
   factory VideoResourceHeader({
-    $core.String mimeType,
+    $core.String? mimeType,
   }) {
     final _result = create();
     if (mimeType != null) {
@@ -196,7 +196,7 @@ class VideoResourceHeader extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  VideoResourceHeader copyWith(void Function(VideoResourceHeader) updates) => super.copyWith((message) => updates(message as VideoResourceHeader)); // ignore: deprecated_member_use
+  VideoResourceHeader copyWith(void Function(VideoResourceHeader) updates) => super.copyWith((message) => updates(message as VideoResourceHeader)) as VideoResourceHeader; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static VideoResourceHeader create() => VideoResourceHeader._();
@@ -204,7 +204,7 @@ class VideoResourceHeader extends $pb.GeneratedMessage {
   static $pb.PbList<VideoResourceHeader> createRepeated() => $pb.PbList<VideoResourceHeader>();
   @$core.pragma('dart2js:noInline')
   static VideoResourceHeader getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<VideoResourceHeader>(create);
-  static VideoResourceHeader _defaultInstance;
+  static VideoResourceHeader? _defaultInstance;
 
   @$pb.TagNumber(2)
   $core.String get mimeType => $_getSZ(0);
@@ -225,8 +225,8 @@ class DataRange extends $pb.GeneratedMessage {
 
   DataRange._() : super();
   factory DataRange({
-    $core.int start,
-    $core.int end,
+    $core.int? start,
+    $core.int? end,
   }) {
     final _result = create();
     if (start != null) {
@@ -248,7 +248,7 @@ class DataRange extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  DataRange copyWith(void Function(DataRange) updates) => super.copyWith((message) => updates(message as DataRange)); // ignore: deprecated_member_use
+  DataRange copyWith(void Function(DataRange) updates) => super.copyWith((message) => updates(message as DataRange)) as DataRange; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static DataRange create() => DataRange._();
@@ -256,7 +256,7 @@ class DataRange extends $pb.GeneratedMessage {
   static $pb.PbList<DataRange> createRepeated() => $pb.PbList<DataRange>();
   @$core.pragma('dart2js:noInline')
   static DataRange getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DataRange>(create);
-  static DataRange _defaultInstance;
+  static DataRange? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get start => $_getIZ(0);
@@ -287,9 +287,9 @@ class AudioProperties extends $pb.GeneratedMessage {
 
   AudioProperties._() : super();
   factory AudioProperties({
-    $core.int samplingRate,
-    $core.int numberOfChannels,
-    $core.int frameSize,
+    $core.int? samplingRate,
+    $core.int? numberOfChannels,
+    $core.int? frameSize,
   }) {
     final _result = create();
     if (samplingRate != null) {
@@ -314,7 +314,7 @@ class AudioProperties extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  AudioProperties copyWith(void Function(AudioProperties) updates) => super.copyWith((message) => updates(message as AudioProperties)); // ignore: deprecated_member_use
+  AudioProperties copyWith(void Function(AudioProperties) updates) => super.copyWith((message) => updates(message as AudioProperties)) as AudioProperties; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static AudioProperties create() => AudioProperties._();
@@ -322,7 +322,7 @@ class AudioProperties extends $pb.GeneratedMessage {
   static $pb.PbList<AudioProperties> createRepeated() => $pb.PbList<AudioProperties>();
   @$core.pragma('dart2js:noInline')
   static AudioProperties getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AudioProperties>(create);
-  static AudioProperties _defaultInstance;
+  static AudioProperties? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get samplingRate => $_getIZ(0);
@@ -360,7 +360,7 @@ class Color extends $pb.GeneratedMessage {
 
   Color._() : super();
   factory Color({
-    $core.int value,
+    $core.int? value,
   }) {
     final _result = create();
     if (value != null) {
@@ -379,7 +379,7 @@ class Color extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Color copyWith(void Function(Color) updates) => super.copyWith((message) => updates(message as Color)); // ignore: deprecated_member_use
+  Color copyWith(void Function(Color) updates) => super.copyWith((message) => updates(message as Color)) as Color; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Color create() => Color._();
@@ -387,7 +387,7 @@ class Color extends $pb.GeneratedMessage {
   static $pb.PbList<Color> createRepeated() => $pb.PbList<Color>();
   @$core.pragma('dart2js:noInline')
   static Color getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Color>(create);
-  static Color _defaultInstance;
+  static Color? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get value => $_getIZ(0);
@@ -408,8 +408,8 @@ class Point extends $pb.GeneratedMessage {
 
   Point._() : super();
   factory Point({
-    $core.double dx,
-    $core.double dy,
+    $core.double? dx,
+    $core.double? dy,
   }) {
     final _result = create();
     if (dx != null) {
@@ -431,7 +431,7 @@ class Point extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Point copyWith(void Function(Point) updates) => super.copyWith((message) => updates(message as Point)); // ignore: deprecated_member_use
+  Point copyWith(void Function(Point) updates) => super.copyWith((message) => updates(message as Point)) as Point; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Point create() => Point._();
@@ -439,7 +439,7 @@ class Point extends $pb.GeneratedMessage {
   static $pb.PbList<Point> createRepeated() => $pb.PbList<Point>();
   @$core.pragma('dart2js:noInline')
   static Point getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Point>(create);
-  static Point _defaultInstance;
+  static Point? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.double get dx => $_getN(0);
@@ -469,8 +469,8 @@ class PathPoint extends $pb.GeneratedMessage {
 
   PathPoint._() : super();
   factory PathPoint({
-    Point coordinates,
-    $core.double pressure,
+    Point? coordinates,
+    $core.double? pressure,
   }) {
     final _result = create();
     if (coordinates != null) {
@@ -492,7 +492,7 @@ class PathPoint extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  PathPoint copyWith(void Function(PathPoint) updates) => super.copyWith((message) => updates(message as PathPoint)); // ignore: deprecated_member_use
+  PathPoint copyWith(void Function(PathPoint) updates) => super.copyWith((message) => updates(message as PathPoint)) as PathPoint; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PathPoint create() => PathPoint._();
@@ -500,7 +500,7 @@ class PathPoint extends $pb.GeneratedMessage {
   static $pb.PbList<PathPoint> createRepeated() => $pb.PbList<PathPoint>();
   @$core.pragma('dart2js:noInline')
   static PathPoint getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PathPoint>(create);
-  static PathPoint _defaultInstance;
+  static PathPoint? _defaultInstance;
 
   @$pb.TagNumber(1)
   Point get coordinates => $_getN(0);
@@ -533,9 +533,9 @@ class Path extends $pb.GeneratedMessage {
 
   Path._() : super();
   factory Path({
-    Color color,
-    $core.double strokeWidth,
-    $core.Iterable<PathPoint> points,
+    Color? color,
+    $core.double? strokeWidth,
+    $core.Iterable<PathPoint>? points,
   }) {
     final _result = create();
     if (color != null) {
@@ -560,7 +560,7 @@ class Path extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Path copyWith(void Function(Path) updates) => super.copyWith((message) => updates(message as Path)); // ignore: deprecated_member_use
+  Path copyWith(void Function(Path) updates) => super.copyWith((message) => updates(message as Path)) as Path; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Path create() => Path._();
@@ -568,7 +568,7 @@ class Path extends $pb.GeneratedMessage {
   static $pb.PbList<Path> createRepeated() => $pb.PbList<Path>();
   @$core.pragma('dart2js:noInline')
   static Path getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Path>(create);
-  static Path _defaultInstance;
+  static Path? _defaultInstance;
 
   @$pb.TagNumber(1)
   Color get color => $_getN(0);
@@ -606,11 +606,11 @@ class MaterialRenderable extends $pb.GeneratedMessage {
 
   MaterialRenderable._() : super();
   factory MaterialRenderable({
-    Point topLeftCorner,
-    $core.double width,
-    $core.double height,
-    $core.String resourceId,
-    $core.int pageNumber,
+    Point? topLeftCorner,
+    $core.double? width,
+    $core.double? height,
+    $core.String? resourceId,
+    $core.int? pageNumber,
   }) {
     final _result = create();
     if (topLeftCorner != null) {
@@ -641,7 +641,7 @@ class MaterialRenderable extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MaterialRenderable copyWith(void Function(MaterialRenderable) updates) => super.copyWith((message) => updates(message as MaterialRenderable)); // ignore: deprecated_member_use
+  MaterialRenderable copyWith(void Function(MaterialRenderable) updates) => super.copyWith((message) => updates(message as MaterialRenderable)) as MaterialRenderable; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static MaterialRenderable create() => MaterialRenderable._();
@@ -649,7 +649,7 @@ class MaterialRenderable extends $pb.GeneratedMessage {
   static $pb.PbList<MaterialRenderable> createRepeated() => $pb.PbList<MaterialRenderable>();
   @$core.pragma('dart2js:noInline')
   static MaterialRenderable getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MaterialRenderable>(create);
-  static MaterialRenderable _defaultInstance;
+  static MaterialRenderable? _defaultInstance;
 
   @$pb.TagNumber(1)
   Point get topLeftCorner => $_getN(0);
@@ -710,10 +710,10 @@ class Pointer extends $pb.GeneratedMessage {
 
   Pointer._() : super();
   factory Pointer({
-    Point coordinates,
-    Color color,
-    $core.double strokeWidth,
-    Pointer_PointerType type,
+    Point? coordinates,
+    Color? color,
+    $core.double? strokeWidth,
+    Pointer_PointerType? type,
   }) {
     final _result = create();
     if (coordinates != null) {
@@ -741,7 +741,7 @@ class Pointer extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Pointer copyWith(void Function(Pointer) updates) => super.copyWith((message) => updates(message as Pointer)); // ignore: deprecated_member_use
+  Pointer copyWith(void Function(Pointer) updates) => super.copyWith((message) => updates(message as Pointer)) as Pointer; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Pointer create() => Pointer._();
@@ -749,7 +749,7 @@ class Pointer extends $pb.GeneratedMessage {
   static $pb.PbList<Pointer> createRepeated() => $pb.PbList<Pointer>();
   @$core.pragma('dart2js:noInline')
   static Pointer getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Pointer>(create);
-  static Pointer _defaultInstance;
+  static Pointer? _defaultInstance;
 
   @$pb.TagNumber(1)
   Point get coordinates => $_getN(0);
@@ -802,9 +802,9 @@ class Viewport extends $pb.GeneratedMessage {
 
   Viewport._() : super();
   factory Viewport({
-    Point topLeftCorner,
-    $core.double width,
-    $core.double height,
+    Point? topLeftCorner,
+    $core.double? width,
+    $core.double? height,
   }) {
     final _result = create();
     if (topLeftCorner != null) {
@@ -829,7 +829,7 @@ class Viewport extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Viewport copyWith(void Function(Viewport) updates) => super.copyWith((message) => updates(message as Viewport)); // ignore: deprecated_member_use
+  Viewport copyWith(void Function(Viewport) updates) => super.copyWith((message) => updates(message as Viewport)) as Viewport; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static Viewport create() => Viewport._();
@@ -837,7 +837,7 @@ class Viewport extends $pb.GeneratedMessage {
   static $pb.PbList<Viewport> createRepeated() => $pb.PbList<Viewport>();
   @$core.pragma('dart2js:noInline')
   static Viewport getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Viewport>(create);
-  static Viewport _defaultInstance;
+  static Viewport? _defaultInstance;
 
   @$pb.TagNumber(1)
   Point get topLeftCorner => $_getN(0);
@@ -881,11 +881,11 @@ class RenderingInstructions extends $pb.GeneratedMessage {
 
   RenderingInstructions._() : super();
   factory RenderingInstructions({
-    Viewport viewport,
-    Color backgroundColor,
-    $core.Iterable<MaterialRenderable> materialRenderables,
-    $core.Iterable<Path> paths,
-    Pointer pointer,
+    Viewport? viewport,
+    Color? backgroundColor,
+    $core.Iterable<MaterialRenderable>? materialRenderables,
+    $core.Iterable<Path>? paths,
+    Pointer? pointer,
   }) {
     final _result = create();
     if (viewport != null) {
@@ -916,7 +916,7 @@ class RenderingInstructions extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  RenderingInstructions copyWith(void Function(RenderingInstructions) updates) => super.copyWith((message) => updates(message as RenderingInstructions)); // ignore: deprecated_member_use
+  RenderingInstructions copyWith(void Function(RenderingInstructions) updates) => super.copyWith((message) => updates(message as RenderingInstructions)) as RenderingInstructions; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static RenderingInstructions create() => RenderingInstructions._();
@@ -924,7 +924,7 @@ class RenderingInstructions extends $pb.GeneratedMessage {
   static $pb.PbList<RenderingInstructions> createRepeated() => $pb.PbList<RenderingInstructions>();
   @$core.pragma('dart2js:noInline')
   static RenderingInstructions getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RenderingInstructions>(create);
-  static RenderingInstructions _defaultInstance;
+  static RenderingInstructions? _defaultInstance;
 
   @$pb.TagNumber(1)
   Viewport get viewport => $_getN(0);
