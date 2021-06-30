@@ -63,7 +63,8 @@ class VideoBuilder implements SectionBuilder {
       videoResourceDataRanges: _videoResourceDataRanges,
     ).writeToBuffer();
 
-    await out.writeBytes(convertUnsignedShortToBytes(videoHeaderData.length));
+    await out
+        .writeBytes(convertUnsigned32BitIntToBytes(videoHeaderData.length));
     await out.writeBytes(videoHeaderData);
     await copyInputStreamToOutputStream(_mediaPagesInputStream, out);
     await copyInputStreamToOutputStream(_videoResourcesInputStream, out);

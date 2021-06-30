@@ -8,6 +8,8 @@ import 'package:npxl_video/src/revision.dart';
 import 'package:npxl_video/src/video_builder.dart';
 import 'package:test/test.dart';
 
+const kiVideoHeaderStartIndex = 6;
+
 void main() {
   group("VideoBuilder Tests", () {
     group("buildToOutputStream(out)", () {
@@ -39,17 +41,18 @@ void main() {
 
         final ret = InMemoryByteOutputStream();
         await instance.buildToOutputStream(ret);
-        final returnedVideoHeaderLength =
-            getUnsignedShortFromUint8List(ret.data.sublist(2, 4));
+        final returnedVideoHeaderLength = getUnsigned32BitIntFromUint8List(
+            ret.data.sublist(2, kiVideoHeaderStartIndex));
 
         expect(returnedVideoHeaderLength, expectedVideoHeaderLength);
       });
       group("Instance video header", () {
         VideoHeader getVideoHeaderFromReturnedData(Uint8List data) {
-          final videoHeaderLength =
-              getUnsignedShortFromUint8List(data.sublist(2, 4));
+          final videoHeaderLength = getUnsigned32BitIntFromUint8List(
+              data.sublist(2, kiVideoHeaderStartIndex));
 
-          return VideoHeader.fromBuffer(data.sublist(4, 4 + videoHeaderLength));
+          return VideoHeader.fromBuffer(data.sublist(kiVideoHeaderStartIndex,
+              kiVideoHeaderStartIndex + videoHeaderLength));
         }
 
         test(
@@ -190,7 +193,8 @@ void main() {
         final ret = InMemoryByteOutputStream();
         await instance.buildToOutputStream(ret);
         final mediaPagesSection = ret.data.sublist(
-            4 + expectedVideoHeaderLength, 4 + expectedVideoHeaderLength + 3);
+            kiVideoHeaderStartIndex + expectedVideoHeaderLength,
+            kiVideoHeaderStartIndex + expectedVideoHeaderLength + 3);
 
         expect(mediaPagesSection, [0xaa, 0xbb, 0xcc]);
       });
@@ -215,7 +219,8 @@ void main() {
         final ret = InMemoryByteOutputStream();
         await instance.buildToOutputStream(ret);
         final videoResourcesSection = ret.data.sublist(
-            4 + expectedVideoHeaderLength, 4 + expectedVideoHeaderLength + 3);
+            kiVideoHeaderStartIndex + expectedVideoHeaderLength,
+            kiVideoHeaderStartIndex + expectedVideoHeaderLength + 3);
 
         expect(videoResourcesSection, [0xaa, 0xbb, 0xcc]);
       });
