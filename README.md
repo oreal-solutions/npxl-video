@@ -10,10 +10,6 @@ The npxl video format uses [opus](https://opus-codec.org/) as its audio codec. T
 libopus classes. It is up to the user of the library to do the encoding and decoding of audio. The LytOwl team will
 provide a simple libopus library specifically for use with this library in the near future.
 
-## Understanding this library
-
-![Library Architecture](docs/assets/classes.png)
-
 ## Generating `npxl_video.pb.dart` from the proto file
 
 This should be done only when [npxl_video.proto](docs/npxl_video.proto) is modified.
